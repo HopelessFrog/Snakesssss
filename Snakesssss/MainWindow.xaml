@@ -11,13 +11,10 @@
         Title="MainWindow" Height="450" Width="900">
 
 
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
-
 
     <Grid>
         <materialDesign:Card>
+
             <TabControl
                 VerticalContentAlignment="Bottom"
                 materialDesign:ColorZoneAssist.Mode="PrimaryMid"
@@ -46,7 +43,8 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Column="1" Row="1">
-                                <ListBox Style="{StaticResource MaterialDesignGridList}"
+                                <ListBox x:Name="SnakeList"
+                                         Style="{StaticResource MaterialDesignGridList}"
                                          ItemsSource="{Binding Snakes}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -83,7 +81,7 @@
                                                                     <TextBox
                                                                         materialDesign:HintAssist.Hint="Family"
                                                                         materialDesign:HintAssist.IsFloating="True"
-                                                                        Text="{Binding Name}" />
+                                                                        Text="{Binding Family.Name}" />
                                                                 </StackPanel>
 
                                                                 <Button
@@ -130,6 +128,7 @@
                                                                 HorizontalAlignment="Center"
                                                                 VerticalAlignment="Top">
                                                                 <Grid.RowDefinitions>
+                                                                    <RowDefinition />
                                                                     <RowDefinition />
                                                                     <RowDefinition />
                                                                     <RowDefinition />
@@ -219,21 +218,39 @@
                                                                         </ListBox.ItemTemplate>
                                                                     </ListBox>
                                                                 </Expander>
-                                                                <StackPanel Grid.Row="6" Orientation="Horizontal"
+                                                                <StackPanel Grid.Row="6" Orientation="Vertical"
+                                                                            HorizontalAlignment="Center">
+                                                                    <TextBlock>Dangerous Score</TextBlock>
+                                                                    <materialDesign:RatingBar
+                                                                        IsPreviewValueEnabled="True"
+                                                                        Max="5"
+                                                                        Min="0"
+                                                                        ValueIncrements="0.25"
+                                                                        Value="{Binding DangerausScore}"
+                                                                        PreviewMouseDown="UIElement_OnPreviewMouseDown" />
+
+                                                                </StackPanel>
+                                                                <StackPanel Grid.Row="7" Orientation="Horizontal"
                                                                             HorizontalAlignment="Right">
                                                                     <Button
+                                                                        IsEnabled="{Binding Path = DataContext.User.CanEdit, Source={x:Reference Name=SnakeList}}"
                                                                         Margin="5"
                                                                         HorizontalAlignment="Right"
                                                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                                                        ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                                                                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                                                                        Command="{Binding Path = DataContext.EditSnake, Source={x:Reference Name=SnakeList}}"
+                                                                        CommandParameter="{Binding .}">
                                                                         <materialDesign:PackIcon
                                                                             Width="20"
                                                                             Height="20"
                                                                             Kind="Pencil" />
                                                                     </Button>
                                                                     <Button
+                                                                        IsEnabled="{Binding Path = DataContext.User.CanEdit, Source={x:Reference Name=SnakeList}}"
                                                                         materialDesign:ColorZoneAssist.Mode="Dark"
                                                                         Margin="5"
+                                                                        Command="{Binding Path = DataContext.DeleteSnake, Source={x:Reference Name=SnakeList}}"
+                                                                        CommandParameter="{Binding .}"
                                                                         HorizontalAlignment="Right"
                                                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                                                         ToolTip="MaterialDesignFloatingActionMiniLightButton">
@@ -359,7 +376,8 @@
                                                     materialDesign:HintAssist.Hint="Search....................................."
                                                     materialDesign:HintAssist.Foreground="Green"
                                                     materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                    Text="{Binding SnakeForSearch.Name}" />
                                                 <Button
                                                     Command="{Binding Search}"
                                                     Style="{StaticResource MaterialDesignToolButton}">
@@ -379,14 +397,139 @@
                                     </Grid>
                                     <Grid Grid.Row="2">
 
+                                        <Viewbox HorizontalAlignment="Left">
 
-                                        <!--<ScrollViewer HorizontalAlignment="Stretch"
-                                                      HorizontalScrollBarVisibility="Disabled"
-                                                      VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                                            <TreeView>
-                                                <TreeViewItem />
-                                            </TreeView>
-                                        </ScrollViewer>-->
+
+                                            <ScrollViewer Margin="15" HorizontalAlignment="Left"
+                                                          HorizontalScrollBarVisibility="Disabled"
+                                                          VerticalScrollBarVisibility="Auto">
+                                                <Grid HorizontalAlignment="Stretch">
+
+
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+
+
+                                                    </Grid.RowDefinitions>
+
+
+                                                    <Viewbox Grid.Row="0" Margin="5,0,5,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    HorizontalAlignment="Center">
+                                                            <Label FontSize="26" Padding="0,15,14,0">Lenght:</Label>
+                                                            <TextBox
+                                                                Margin="0,0,10,0"
+                                                                FontSize="20"
+                                                                materialDesign:HintAssist.Hint="Min"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding SnakeForSearch.MinLenght}" />
+                                                            <TextBox
+                                                                Margin="0,0,10,0"
+                                                                FontSize="20"
+                                                                materialDesign:HintAssist.Hint="Max"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding SnakeForSearch.MaxLenght}" />
+
+                                                        </StackPanel>
+
+
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="5" Margin="5,0,5,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    HorizontalAlignment="Center"
+                                                                    IsEnabled="{Binding SelectedPoisonType}">
+                                                            <TextBlock TextWrapping="Wrap" Padding="0,15,14,0"
+                                                                       FontSize="20">
+                                                                Amount <LineBreak /> of poison:
+                                                            </TextBlock>
+                                                            <TextBox
+                                                                FontSize="20"
+                                                                Margin="0,0,10,0"
+                                                                materialDesign:HintAssist.Hint="Min"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding SnakeForSearch.MinAmountOfPoison}" />
+                                                            <TextBox
+                                                                FontSize="20"
+                                                                Margin="0,0,10,0"
+                                                                materialDesign:HintAssist.Hint="Max"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding SnakeForSearch.MaxAmountOfPoison}" />
+
+                                                        </StackPanel>
+
+
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="1" Margin="5">
+
+                                                        <xctk:CheckComboBox
+                                                            x:Name="AreasBoxSearch"
+                                                            ItemSelectionChanged="AreasBox_OnItemSelectionChangedSearch"
+                                                            FontSize="20"
+                                                            materialDesign:HintAssist.Hint="Areas"
+                                                            materialDesign:HintAssist.IsFloating="True"
+                                                            ItemsSource="{Binding Areas}"
+                                                            Width="200" />
+
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="2" Margin="5">
+                                                        <xctk:CheckComboBox
+                                                            x:Name="ColorsBoxSearch"
+                                                            FontSize="20"
+                                                            ItemSelectionChanged="ColorsBox_OnItemSelectionChangedSearch"
+                                                            materialDesign:HintAssist.Hint="Colors"
+                                                            materialDesign:HintAssist.IsFloating="True"
+                                                            ItemsSource="{Binding Colors}"
+                                                            Width="200">
+                                                            <xctk:CheckComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                        <Ellipse Margin="3,0,3,0" Width="15"
+                                                                            Fill="{Binding Color}" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </xctk:CheckComboBox.ItemTemplate>
+                                                        </xctk:CheckComboBox>
+
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="3" Margin="5,0,5,0">
+                                                        <ComboBox Margin="0" Padding="0"
+                                                                  SelectedIndex="0"
+                                                                  materialDesign:HintAssist.Hint="Family"
+                                                                  materialDesign:HintAssist.IsFloating="True"
+                                                                  FontSize="20" Width="200" Height="60"
+                                                                  ItemsSource="{Binding Familyes}"
+                                                                  SelectedItem="{Binding SnakeForSearch.Family}" />
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="4" Margin="5,0,5,0">
+                                                        <ComboBox Margin="0" Padding="0"
+                                                                  SelectedIndex="0"
+                                                                  materialDesign:HintAssist.Hint="Poison Type"
+                                                                  materialDesign:HintAssist.IsFloating="True"
+                                                                  FontSize="20" Width="200" Height="60"
+                                                                  ItemsSource="{Binding PoisonTypes}"
+                                                                  SelectedItem="{Binding PoisonTypeSearch}" />
+                                                    </Viewbox>
+                                                    <Viewbox Grid.Row="6" Margin="5,0,5,0">
+                                                        <ComboBox Margin="0" Padding="0"
+                                                                  SelectedIndex="0"
+                                                                  materialDesign:HintAssist.Hint="Design"
+                                                                  materialDesign:HintAssist.IsFloating="True"
+                                                                  FontSize="20" Width="200" Height="60"
+                                                                  ItemsSource="{Binding Designs}"
+                                                                  SelectedItem="{Binding SnakeForSearch.Design}" />
+                                                    </Viewbox>
+
+
+                                                </Grid>
+                                            </ScrollViewer>
+                                        </Viewbox>
                                     </Grid>
 
 
@@ -395,7 +538,23 @@
                         </Grid>
                     </materialDesign:Card>
                 </TabItem>
-                <TabItem>
+                <TabItem IsEnabled="False">
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="40"
+                                Height="40"
+                                HorizontalAlignment="Center"
+                                Kind="Image" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="PicSearch" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem IsEnabled="{Binding User.CanEdit}">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
@@ -472,8 +631,10 @@
                                                         Kind="PlusCircle" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction Command="{Binding SetDefaultPropertiesSnake}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding SetDefaultPropertiesSnake}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -540,12 +701,15 @@
                                                         <Viewbox Grid.Row="0">
                                                             <Grid>
                                                                 <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto" />
 
-                                                                    <RowDefinition Height="*"/>
+                                                                    <RowDefinition Height="*" />
                                                                 </Grid.RowDefinitions>
-                                                                <Image Grid.Row="0" Width="50" Height="50" Source="{Binding SnakeForCreate.ImagePath}"/>
-                                                                <Button Grid.Row="1"  HorizontalAlignment="Center" Command="{Binding OpenImage}"  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" >
+                                                                <Image Grid.Row="0" Width="50" Height="50"
+                                                                       Source="{Binding SnakeForCreate.ImagePath}" />
+                                                                <Button Grid.Row="1" HorizontalAlignment="Center"
+                                                                        Command="{Binding OpenImage}"
+                                                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
                                                                     <materialDesign:PackIcon
                                                                         Width="15"
                                                                         Height="15"
@@ -561,7 +725,7 @@
                                                                 Padding="2"
                                                                 materialDesign:HintAssist.Hint="Name"
                                                                 materialDesign:HintAssist.IsFloating="True"
-                                                                Text="{Binding SnakeForCreate.Name}"/>
+                                                                Text="{Binding SnakeForCreate.Name}" />
 
                                                         </Viewbox>
 
@@ -573,12 +737,12 @@
                                                                     Margin="0,0,10,0"
                                                                     materialDesign:HintAssist.Hint="Min"
                                                                     materialDesign:HintAssist.IsFloating="True"
-                                                                    Text="{Binding SnakeForCreate.MinLenght}"/>
+                                                                    Text="{Binding SnakeForCreate.MinLenght}" />
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
                                                                     materialDesign:HintAssist.Hint="Max"
                                                                     materialDesign:HintAssist.IsFloating="True"
-                                                                    Text="{Binding SnakeForCreate.MaxLenght}"/>
+                                                                    Text="{Binding SnakeForCreate.MaxLenght}" />
 
                                                             </StackPanel>
 
@@ -595,12 +759,12 @@
                                                                     Margin="0,0,10,0"
                                                                     materialDesign:HintAssist.Hint="Min"
                                                                     materialDesign:HintAssist.IsFloating="True"
-                                                                    Text="{Binding SnakeForCreate.MinAmountOfPoison}"/>
+                                                                    Text="{Binding SnakeForCreate.MinAmountOfPoison}" />
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
                                                                     materialDesign:HintAssist.Hint="Max"
-                                                                    materialDesign:HintAssist.IsFloating="True" 
-                                                                    Text="{Binding SnakeForCreate.MaxAmountOfPoison}"/>
+                                                                    materialDesign:HintAssist.IsFloating="True"
+                                                                    Text="{Binding SnakeForCreate.MaxAmountOfPoison}" />
 
                                                             </StackPanel>
 
@@ -615,7 +779,7 @@
                                                                 materialDesign:HintAssist.Hint="Areas"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 ItemsSource="{Binding Areas}"
-                                                               Width="100" />
+                                                                Width="100" />
 
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="5" Margin="5">
@@ -624,7 +788,7 @@
                                                                 ItemSelectionChanged="ColorsBox_OnItemSelectionChanged"
                                                                 materialDesign:HintAssist.Hint="Colors"
                                                                 materialDesign:HintAssist.IsFloating="True"
-                                                                ItemsSource="{Binding Colors}" 
+                                                                ItemsSource="{Binding Colors}"
                                                                 Width="100">
                                                                 <xctk:CheckComboBox.ItemTemplate>
                                                                     <DataTemplate>
@@ -639,60 +803,80 @@
 
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="6" Margin="5,0,5,0">
-                                                            <ComboBox Margin="0" Padding="0" materialDesign:HintAssist.Hint="Family"
-                                                                materialDesign:HintAssist.IsFloating="True"
-                                                                FontSize="15" Width="100" Height="50"
-                                                                ItemsSource="{Binding Familyes}"
-                                                                SelectedItem="{Binding SnakeForCreate.Family}"/>
-                                                        </Viewbox>
-                                                        <Viewbox Grid.Row="7" Margin="5,0,5,0">
-                                                            <ComboBox Margin="0" Padding="0" materialDesign:HintAssist.Hint="Poison Type"
+                                                            <ComboBox Margin="0" Padding="0"
+                                                                      materialDesign:HintAssist.Hint="Family"
                                                                       materialDesign:HintAssist.IsFloating="True"
                                                                       FontSize="15" Width="100" Height="50"
-                                                                      ItemsSource="{Binding PoisonTypes}" 
-                                                                      SelectedItem="{Binding SnakeForCreate.PoisonType}"/>
+                                                                      ItemsSource="{Binding Familyes}"
+                                                                      SelectedItem="{Binding SnakeForCreate.Family}" />
+                                                        </Viewbox>
+                                                        <Viewbox Grid.Row="7" Margin="5,0,5,0">
+                                                            <ComboBox Margin="0" Padding="0"
+                                                                      materialDesign:HintAssist.Hint="Poison Type"
+                                                                      materialDesign:HintAssist.IsFloating="True"
+                                                                      FontSize="15" Width="100" Height="50"
+                                                                      ItemsSource="{Binding PoisonTypes}"
+                                                                      SelectedItem="{Binding SnakeForCreate.PoisonType}" />
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="8" Margin="5,0,5,0">
-                                                            <ComboBox Margin="0" Padding="0" materialDesign:HintAssist.Hint="Design"
+                                                            <ComboBox Margin="0" Padding="0"
+                                                                      materialDesign:HintAssist.Hint="Design"
                                                                       materialDesign:HintAssist.IsFloating="True"
                                                                       FontSize="15" Width="100" Height="50"
                                                                       ItemsSource="{Binding Designs}"
-                                                                      SelectedItem="{Binding SnakeForCreate.Design}"/>
+                                                                      SelectedItem="{Binding SnakeForCreate.Design}" />
                                                         </Viewbox>
-                                                        <Viewbox Grid.Row="9" Margin ="5">
-                                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                                        <Viewbox Grid.Row="9" Margin="5">
+                                                            <StackPanel Orientation="Vertical"
+                                                                        HorizontalAlignment="Center">
                                                                 <TextBlock>Dangerous Score</TextBlock>
                                                                 <materialDesign:RatingBar
+                                                                    x:Name="RatingBar"
                                                                     materialDesign:HintAssist.Hint="Dangerous Score"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     IsPreviewValueEnabled="True"
                                                                     Max="5"
                                                                     Min="0"
                                                                     ValueIncrements="0.25"
-                                                                    
+                                                                    ValueChanged="RatingBar_OnValueChanged"
                                                                     Value="{Binding SnakeForCreate.DangerausScore}" />
 
                                                             </StackPanel>
-                                                            
+
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="10">
-                                                           <StackPanel Orientation="Horizontal">
-                                                               <TextBlock Margin="0,5,0,5" Text="Ai Folder"/>
-                                                                <ToggleButton Style="{StaticResource MaterialDesignActionLightToggleButton}"
-                                                                              ToolTip="MaterialDesignActionLightToggleButton"
-                                                                              Content="{materialDesign:PackIcon Kind=Creation}"/>
-                                                           </StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Margin="0,5,0,5" Text="Ai Folder" />
+                                                                <ToggleButton
+                                                                    Style="{StaticResource MaterialDesignActionLightToggleButton}"
+                                                                    ToolTip="MaterialDesignActionLightToggleButton"
+                                                                    Content="{materialDesign:PackIcon Kind=Creation}" />
+                                                            </StackPanel>
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="11" Margin="10">
-                                                            <Button 
+                                                            <Button
                                                                 HorizontalAlignment="Left"
                                                                 Content="ADD">
-                                                            <i:Interaction.Triggers>
-                                                                <i:EventTrigger EventName="Click">
-                                                                    <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                                    <i:InvokeCommandAction  Command="{Binding AddSnakeCommand}" />
-                                                                </i:EventTrigger>
-                                                            </i:Interaction.Triggers>
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Click">
+                                                                        <i:InvokeCommandAction
+                                                                            Command="{Binding AddSnakeCommand}" />
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Click">
+                                                                        <i:Interaction.Behaviors>
+                                                                            <i:ConditionBehavior>
+                                                                                <i:ConditionalExpression>
+                                                                                    <i:ComparisonCondition
+                                                                                        LeftOperand="{Binding IsValidate}"
+                                                                                        RightOperand="true" />
+                                                                                </i:ConditionalExpression>
+                                                                            </i:ConditionBehavior>
+                                                                        </i:Interaction.Behaviors>
+
+                                                                        <i:InvokeCommandAction
+                                                                            Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
                                                             </Button>
                                                         </Viewbox>
 
@@ -759,8 +943,10 @@
                                                         Kind="PlusCircle" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding SetDefaultPropertiesPoison}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding SetDefaultPropertiesPoison}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -791,7 +977,7 @@
                                                         <materialDesign:PackIcon
                                                             HorizontalAlignment="Right"
                                                             Kind="ArrowLeft" />
-                                                        
+
                                                     </Button>
                                                     <TextBlock
                                                         Margin="8,0,0,0"
@@ -799,24 +985,38 @@
                                                         Text="Add Poison" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
-                                                <Viewbox Grid.Row="1" Margin="5,0,5,0">
-                                                    <TextBox
-                                                        Width="100"
-                                                        Margin="0"
-                                                        Padding="2"
-                                                        materialDesign:HintAssist.Hint="Name"
-                                                        materialDesign:HintAssist.IsFloating="True"
-                                                        Text="{Binding PoisonTypeForCreate.Name}"/>
+                                            <Viewbox Grid.Row="1" Margin="5,0,5,0">
+                                                <TextBox
+                                                    Width="100"
+                                                    Margin="0"
+                                                    Padding="2"
+                                                    materialDesign:HintAssist.Hint="Name"
+                                                    materialDesign:HintAssist.IsFloating="True"
+                                                    Text="{Binding PoisonTypeForCreate.Name}" />
 
-                                                </Viewbox>
+                                            </Viewbox>
                                             <Viewbox Grid.Row="2" Margin="10">
-                                                <Button 
+                                                <Button
                                                     HorizontalAlignment="Left"
                                                     Content="ADD">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding AddPoisonCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding AddPoisonCommand}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:Interaction.Behaviors>
+                                                                <i:ConditionBehavior>
+                                                                    <i:ConditionalExpression>
+                                                                        <i:ComparisonCondition
+                                                                            LeftOperand="{Binding IsValidatePoison}"
+                                                                            RightOperand="true" />
+                                                                    </i:ConditionalExpression>
+                                                                </i:ConditionBehavior>
+                                                            </i:Interaction.Behaviors>
+
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -881,8 +1081,10 @@
                                                         Kind="PlusCircle" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding SetDefaultPropertiesArea}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding SetDefaultPropertiesArea}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -927,17 +1129,31 @@
                                                     Padding="2"
                                                     materialDesign:HintAssist.Hint="Name"
                                                     materialDesign:HintAssist.IsFloating="True"
-                                                    Text="{Binding AreaForCreate.Name}"/>
+                                                    Text="{Binding AreaForCreate.Name}" />
 
                                             </Viewbox>
                                             <Viewbox Grid.Row="2" Margin="10">
-                                                <Button 
+                                                <Button
                                                     HorizontalAlignment="Left"
                                                     Content="ADD">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding AddAreaCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding AddAreaCommand}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:Interaction.Behaviors>
+                                                                <i:ConditionBehavior>
+                                                                    <i:ConditionalExpression>
+                                                                        <i:ComparisonCondition
+                                                                            LeftOperand="{Binding IsValidateArea}"
+                                                                            RightOperand="true" />
+                                                                    </i:ConditionalExpression>
+                                                                </i:ConditionBehavior>
+                                                            </i:Interaction.Behaviors>
+
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -1000,8 +1216,10 @@
                                                         Kind="PlusCircle" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding SetDefaultPropertiesFamily}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding SetDefaultPropertiesFamily}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -1046,17 +1264,31 @@
                                                     Padding="2"
                                                     materialDesign:HintAssist.Hint="Name"
                                                     materialDesign:HintAssist.IsFloating="True"
-                                                    Text="{Binding FamilyForCreate.Name}"/>
+                                                    Text="{Binding FamilyForCreate.Name}" />
 
                                             </Viewbox>
                                             <Viewbox Grid.Row="2" Margin="10">
-                                                <Button 
+                                                <Button
                                                     HorizontalAlignment="Left"
                                                     Content="ADD">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding AddFamilyCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding AddFamilyCommand}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:Interaction.Behaviors>
+                                                                <i:ConditionBehavior>
+                                                                    <i:ConditionalExpression>
+                                                                        <i:ComparisonCondition
+                                                                            LeftOperand="{Binding IsValidateFamily}"
+                                                                            RightOperand="true" />
+                                                                    </i:ConditionalExpression>
+                                                                </i:ConditionBehavior>
+                                                            </i:Interaction.Behaviors>
+
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -1119,8 +1351,10 @@
                                                         Kind="PlusCircle" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding SetDefaultPropertiesDesign}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding SetDefaultPropertiesDesign}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -1166,17 +1400,31 @@
                                                     Padding="2"
                                                     materialDesign:HintAssist.Hint="Name"
                                                     materialDesign:HintAssist.IsFloating="True"
-                                                    Text="{Binding DesignForCreate.Name}"/>
+                                                    Text="{Binding DesignForCreate.Name}" />
 
                                             </Viewbox>
                                             <Viewbox Grid.Row="2" Margin="10">
-                                                <Button 
+                                                <Button
                                                     HorizontalAlignment="Left"
                                                     Content="ADD">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
-                                                            <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                            <i:InvokeCommandAction  Command="{Binding AddDesignCommand}" />
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding AddDesignCommand}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <i:Interaction.Behaviors>
+                                                                <i:ConditionBehavior>
+                                                                    <i:ConditionalExpression>
+                                                                        <i:ComparisonCondition
+                                                                            LeftOperand="{Binding IsValidateDesign}"
+                                                                            RightOperand="true" />
+                                                                    </i:ConditionalExpression>
+                                                                </i:ConditionBehavior>
+                                                            </i:Interaction.Behaviors>
+
+                                                            <i:InvokeCommandAction
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
@@ -1190,7 +1438,7 @@
                         </Grid>
                     </materialDesign:Card>
                 </TabItem>
-                <TabItem>
+                <TabItem IsEnabled="{Binding User.CanEdit}">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
@@ -1199,42 +1447,908 @@
                                 Width="24"
                                 Height="24"
                                 HorizontalAlignment="Center"
-                                Kind="Images" />
+                                Kind="Archive" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="Photos" />
+                                Text="Properties" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBlock>
+                    <materialDesign:Card Margin="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
 
-                        <Run
-                            Text="tab 3 content. Default look and behaviors." />
-                        <LineBreak />
-                        <LineBreak />
-                    </TextBlock>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:Card Grid.Column="0" Margin="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="5*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox>
+                                        <materialDesign:ColorZone CornerRadius="10" Margin="2" Mode="SecondaryMid"
+                                                                  VerticalAlignment="Center" Width="219">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="BottleTonicSkull" Height="75" Width="75" />
+                                                <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                                                           FontSize="24" VerticalAlignment="Center" Text="Poison Types" />
+                                            </StackPanel>
+                                        </materialDesign:ColorZone>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <ListBox x:Name="PoisonProp" ItemsSource="{Binding PoisonTypesProperties}"
+                                                     Background="AliceBlue" VerticalAlignment="Stretch">
+                                                <ListBox.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListBoxItem}">
+                                                        <Setter Property="Focusable" Value="False" />
+                                                    </Style>
+                                                </ListBox.ItemContainerStyle>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <materialDesign:Card Width="1400" Height="300" Margin="10">
+                                                            <materialDesign:Flipper
+                                                                Margin="5"
+                                                                materialDesign:ElevationAssist.Elevation="Dp0"
+                                                                Style="{StaticResource MaterialDesignCardFlipper}">
+                                                                <materialDesign:Flipper.FrontContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="3*" />
+                                                                            <ColumnDefinition Width="*" />
+
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Viewbox Grid.Column="0"
+                                                                            HorizontalAlignment="Left" Margin="3">
+                                                                            <TextBlock
+                                                                                Margin="15,3,10,3"
+                                                                                Text="{Binding Name}"
+                                                                                VerticalAlignment="Stretch"
+                                                                                FontSize="20" />
+                                                                        </Viewbox>
+                                                                        <Viewbox Grid.Column="1">
+                                                                            <StackPanel VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Right">
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="Pencil" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                    Command="{Binding Path = DataContext.DeletePoison, Source={x:Reference Name=PoisonProp}}"
+                                                                                    CommandParameter="{Binding .}">
+
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="CloseCircle" />
+                                                                                </Button>
+
+                                                                            </StackPanel>
+
+                                                                        </Viewbox>
+
+
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.FrontContent>
+                                                                <materialDesign:Flipper.BackContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition
+                                                                                Height="*" />
+                                                                            <RowDefinition
+                                                                                Height="2*" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <materialDesign:ColorZone
+                                                                            Padding="6"
+                                                                            Mode="SecondaryMid"
+                                                                            VerticalAlignment="Stretch">
+                                                                            <StackPanel
+                                                                                Orientation="Horizontal">
+                                                                                <Button
+                                                                                    Margin="30,0,0,0"
+                                                                                    Width="50"
+                                                                                    Height="50"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Width="50"
+                                                                                        Height="50"
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Kind="ArrowLeft" />
+                                                                                </Button>
+                                                                                <TextBlock
+                                                                                    FontSize="50"
+                                                                                    Margin="8,0,0,0"
+                                                                                    VerticalAlignment="Center"
+                                                                                    Text="EDIT POISON TYPE" />
+                                                                            </StackPanel>
+                                                                        </materialDesign:ColorZone>
+                                                                        <Grid
+                                                                            Grid.Row="1"
+                                                                            Width="1400"
+                                                                            Margin="0,6,0,0"
+                                                                            HorizontalAlignment="Stretch"
+                                                                            VerticalAlignment="Center">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="2*" />
+                                                                                <ColumnDefinition Width="*" />
+
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Viewbox Grid.Column="0" Margin="3,3,10,3"
+                                                                                HorizontalAlignment="Left">
+                                                                                <TextBox
+                                                                                    Width="300"
+                                                                                    Margin="15,3,10,3"
+                                                                                    FontSize="20"
+                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.IsFloating="True"
+                                                                                    Text="{Binding Name}" />
+
+                                                                            </Viewbox>
+                                                                            <Viewbox Grid.Column="1" Margin="5"
+                                                                                HorizontalAlignment="Right"
+                                                                                VerticalAlignment="Stretch">
+                                                                                <Button
+                                                                                    VerticalAlignment="Stretch"
+                                                                                    Margin="5"
+                                                                                    FontSize="15"
+                                                                                    Content="Change"
+                                                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                                                                                    <i:Interaction.Triggers>
+                                                                                        <i:EventTrigger
+                                                                                            EventName="Click">
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=PoisonProp}}" />
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                                        </i:EventTrigger>
+                                                                                    </i:Interaction.Triggers>
+                                                                                </Button>
+                                                                            </Viewbox>
+
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.BackContent>
+                                                            </materialDesign:Flipper>
+                                                        </materialDesign:Card>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+
+                                        </ScrollViewer>
+                                    </Viewbox>
+
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card Grid.Column="1" Margin="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="5*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox>
+                                        <materialDesign:ColorZone CornerRadius="10" Margin="2" Mode="SecondaryMid"
+                                                                  VerticalAlignment="Center" Width="219">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="MapMarker" Height="75" Width="75" />
+                                                <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                                                           FontSize="24" VerticalAlignment="Center" Text="Areas" />
+                                            </StackPanel>
+                                        </materialDesign:ColorZone>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <ListBox x:Name="AreaProp" ItemsSource="{Binding Areas}"
+                                                     Background="AliceBlue" VerticalAlignment="Stretch">
+                                                <ListBox.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListBoxItem}">
+                                                        <Setter Property="Focusable" Value="False" />
+                                                    </Style>
+                                                </ListBox.ItemContainerStyle>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <materialDesign:Card Width="1400" Height="300" Margin="10">
+                                                            <materialDesign:Flipper
+                                                                Margin="5"
+                                                                materialDesign:ElevationAssist.Elevation="Dp0"
+                                                                Style="{StaticResource MaterialDesignCardFlipper}">
+                                                                <materialDesign:Flipper.FrontContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="3*" />
+                                                                            <ColumnDefinition Width="*" />
+
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Viewbox Grid.Column="0"
+                                                                            HorizontalAlignment="Left" Margin="3">
+                                                                            <TextBlock
+                                                                                Margin="15,3,10,3"
+                                                                                Text="{Binding Name}"
+                                                                                VerticalAlignment="Stretch"
+                                                                                FontSize="20" />
+                                                                        </Viewbox>
+                                                                        <Viewbox Grid.Column="1">
+                                                                            <StackPanel VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Right">
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="Pencil" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                    Command="{Binding Path = DataContext.DeleteArea, Source={x:Reference Name=AreaProp}}"
+                                                                                    CommandParameter="{Binding .}">
+
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="CloseCircle" />
+                                                                                </Button>
+
+                                                                            </StackPanel>
+
+                                                                        </Viewbox>
+
+
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.FrontContent>
+                                                                <materialDesign:Flipper.BackContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition
+                                                                                Height="*" />
+                                                                            <RowDefinition
+                                                                                Height="2*" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <materialDesign:ColorZone
+                                                                            Padding="6"
+                                                                            Mode="SecondaryMid"
+                                                                            VerticalAlignment="Stretch">
+                                                                            <StackPanel
+                                                                                Orientation="Horizontal">
+                                                                                <Button
+                                                                                    Margin="30,0,0,0"
+                                                                                    Width="50"
+                                                                                    Height="50"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Width="50"
+                                                                                        Height="50"
+                                                                                        Kind="ArrowLeft" />
+                                                                                </Button>
+                                                                                <TextBlock
+                                                                                    FontSize="50"
+                                                                                    Margin="8,0,0,0"
+                                                                                    VerticalAlignment="Center"
+                                                                                    Text="EDIT AREA" />
+                                                                            </StackPanel>
+                                                                        </materialDesign:ColorZone>
+                                                                        <Grid
+                                                                            Grid.Row="1"
+                                                                            Width="1400"
+                                                                            Margin="0,6,0,0"
+                                                                            HorizontalAlignment="Stretch"
+                                                                            VerticalAlignment="Center">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="2*" />
+                                                                                <ColumnDefinition Width="*" />
+
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Viewbox Grid.Column="0" Margin="3,3,10,3"
+                                                                                HorizontalAlignment="Left">
+                                                                                <TextBox
+                                                                                    Width="300"
+                                                                                    Margin="15,3,10,3"
+                                                                                    FontSize="20"
+                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.IsFloating="True"
+                                                                                    Text="{Binding Name}" />
+
+                                                                            </Viewbox>
+                                                                            <Viewbox Grid.Column="1" Margin="5"
+                                                                                HorizontalAlignment="Right"
+                                                                                VerticalAlignment="Stretch">
+                                                                                <Button
+                                                                                    VerticalAlignment="Stretch"
+                                                                                    Margin="5"
+                                                                                    FontSize="15"
+                                                                                    Content="Change"
+                                                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                                                                                    <i:Interaction.Triggers>
+                                                                                        <i:EventTrigger
+                                                                                            EventName="Click">
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=AreaProp}}" />
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                                        </i:EventTrigger>
+                                                                                    </i:Interaction.Triggers>
+                                                                                </Button>
+                                                                            </Viewbox>
+
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.BackContent>
+                                                            </materialDesign:Flipper>
+                                                        </materialDesign:Card>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+
+                                        </ScrollViewer>
+                                    </Viewbox>
+
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card Grid.Column="2" Margin="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="5*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox>
+                                        <materialDesign:ColorZone CornerRadius="10" Margin="2" Mode="SecondaryMid"
+                                                                  VerticalAlignment="Center" Width="219">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="FamilyTree" Height="75" Width="75" />
+                                                <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                                                           FontSize="24" VerticalAlignment="Center" Text="Familys" />
+                                            </StackPanel>
+                                        </materialDesign:ColorZone>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <ListBox x:Name="FamilyProp" ItemsSource="{Binding FamilyesProperties}"
+                                                     Background="AliceBlue" VerticalAlignment="Stretch">
+                                                <ListBox.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListBoxItem}">
+                                                        <Setter Property="Focusable" Value="False" />
+                                                    </Style>
+                                                </ListBox.ItemContainerStyle>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <materialDesign:Card Width="1400" Height="300" Margin="10">
+                                                            <materialDesign:Flipper
+                                                                Margin="5"
+                                                                materialDesign:ElevationAssist.Elevation="Dp0"
+                                                                Style="{StaticResource MaterialDesignCardFlipper}">
+                                                                <materialDesign:Flipper.FrontContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="3*" />
+                                                                            <ColumnDefinition Width="*" />
+
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Viewbox Grid.Column="0"
+                                                                            HorizontalAlignment="Left" Margin="3">
+                                                                            <TextBlock
+                                                                                Margin="15,3,10,3"
+                                                                                Text="{Binding Name}"
+                                                                                VerticalAlignment="Stretch"
+                                                                                FontSize="20" />
+                                                                        </Viewbox>
+                                                                        <Viewbox Grid.Column="1">
+                                                                            <StackPanel VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Right">
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="Pencil" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                    Command="{Binding Path = DataContext.DeleteFamily, Source={x:Reference Name=FamilyProp}}"
+                                                                                    CommandParameter="{Binding .}">
+
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="CloseCircle" />
+                                                                                </Button>
+
+                                                                            </StackPanel>
+
+                                                                        </Viewbox>
+
+
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.FrontContent>
+                                                                <materialDesign:Flipper.BackContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition
+                                                                                Height="*" />
+                                                                            <RowDefinition
+                                                                                Height="2*" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <materialDesign:ColorZone
+                                                                            Padding="6"
+                                                                            Mode="SecondaryMid"
+                                                                            VerticalAlignment="Stretch"
+                                                                            HorizontalAlignment="Stretch">
+                                                                            <StackPanel Margin="30,0,0,0"
+                                                                                Orientation="Horizontal">
+                                                                                <Button
+                                                                                    Width="50"
+                                                                                    Height="50"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Width="50"
+                                                                                        Height="50"
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Kind="ArrowLeft" />
+                                                                                </Button>
+                                                                                <TextBlock
+                                                                                    FontSize="50"
+                                                                                    Margin="8,0,0,0"
+                                                                                    VerticalAlignment="Center"
+                                                                                    Text="EDIT FAMILY" />
+                                                                            </StackPanel>
+                                                                        </materialDesign:ColorZone>
+                                                                        <Grid
+                                                                            Grid.Row="1"
+                                                                            Width="1400"
+                                                                            Margin="0,6,0,0"
+                                                                            HorizontalAlignment="Stretch"
+                                                                            VerticalAlignment="Center">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="2*" />
+                                                                                <ColumnDefinition Width="*" />
+
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Viewbox Grid.Column="0" Margin="3,3,10,3"
+                                                                                HorizontalAlignment="Left">
+                                                                                <TextBox
+                                                                                    Width="300"
+                                                                                    Margin="15,3,10,3"
+                                                                                    FontSize="20"
+                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.IsFloating="True"
+                                                                                    Text="{Binding Name}" />
+
+                                                                            </Viewbox>
+                                                                            <Viewbox Grid.Column="1" Margin="5"
+                                                                                HorizontalAlignment="Right"
+                                                                                VerticalAlignment="Stretch">
+                                                                                <Button
+                                                                                    VerticalAlignment="Stretch"
+                                                                                    Margin="5"
+                                                                                    FontSize="15"
+                                                                                    Content="Change"
+                                                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                                                                                    <i:Interaction.Triggers>
+                                                                                        <i:EventTrigger
+                                                                                            EventName="Click">
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=FamilyProp}}" />
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                                        </i:EventTrigger>
+                                                                                    </i:Interaction.Triggers>
+                                                                                </Button>
+                                                                            </Viewbox>
+
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.BackContent>
+                                                            </materialDesign:Flipper>
+                                                        </materialDesign:Card>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+
+                                        </ScrollViewer>
+                                    </Viewbox>
+
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card Grid.Column="3" Margin="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="5*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox>
+                                        <materialDesign:ColorZone CornerRadius="10" Margin="2" Mode="SecondaryMid"
+                                                                  VerticalAlignment="Center" Width="219">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Brush" Height="75" Width="75" />
+                                                <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                                                           FontSize="24" VerticalAlignment="Center" Text="Designs" />
+                                            </StackPanel>
+                                        </materialDesign:ColorZone>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <ListBox x:Name="DesignProp" ItemsSource="{Binding DesignsProperties}"
+                                                     Background="AliceBlue" VerticalAlignment="Stretch">
+                                                <ListBox.ItemContainerStyle>
+                                                    <Style TargetType="{x:Type ListBoxItem}">
+                                                        <Setter Property="Focusable" Value="False" />
+                                                    </Style>
+                                                </ListBox.ItemContainerStyle>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <materialDesign:Card Width="1400" Height="300" Margin="10">
+                                                            <materialDesign:Flipper
+                                                                Margin="5"
+                                                                materialDesign:ElevationAssist.Elevation="Dp0"
+                                                                Style="{StaticResource MaterialDesignCardFlipper}">
+                                                                <materialDesign:Flipper.FrontContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="3*" />
+                                                                            <ColumnDefinition Width="*" />
+
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Viewbox Grid.Column="0"
+                                                                            HorizontalAlignment="Left" Margin="3">
+                                                                            <TextBlock
+                                                                                Margin="15,3,10,3"
+                                                                                Text="{Binding Name}"
+                                                                                VerticalAlignment="Stretch"
+                                                                                FontSize="20" />
+                                                                        </Viewbox>
+                                                                        <Viewbox Grid.Column="1">
+                                                                            <StackPanel VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Right">
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="Pencil" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                    Command="{Binding Path = DataContext.DeleteDesign, Source={x:Reference Name=DesignProp}}"
+                                                                                    CommandParameter="{Binding .}">
+
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="CloseCircle" />
+                                                                                </Button>
+
+                                                                            </StackPanel>
+
+                                                                        </Viewbox>
+
+
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.FrontContent>
+                                                                <materialDesign:Flipper.BackContent>
+                                                                    <Grid
+                                                                        Width="1400"
+                                                                        Height="300">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition
+                                                                                Height="*" />
+                                                                            <RowDefinition
+                                                                                Height="2*" />
+                                                                        </Grid.RowDefinitions>
+                                                                        <materialDesign:ColorZone
+                                                                            Padding="6"
+                                                                            Mode="SecondaryMid"
+                                                                            VerticalAlignment="Stretch">
+                                                                            <StackPanel
+                                                                                Orientation="Horizontal">
+                                                                                <Button
+                                                                                    Margin="30,0,0,0"
+                                                                                    Width="50"
+                                                                                    Height="50"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Width="50"
+                                                                                        Height="50"
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Kind="ArrowLeft" />
+                                                                                </Button>
+                                                                                <TextBlock
+                                                                                    FontSize="50"
+                                                                                    Margin="8,0,0,0"
+                                                                                    VerticalAlignment="Center"
+                                                                                    Text="EDIT Design" />
+                                                                            </StackPanel>
+                                                                        </materialDesign:ColorZone>
+                                                                        <Grid
+                                                                            Grid.Row="1"
+                                                                            Width="1400"
+                                                                            Margin="0,6,0,0"
+                                                                            HorizontalAlignment="Stretch"
+                                                                            VerticalAlignment="Center">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="2*" />
+                                                                                <ColumnDefinition Width="*" />
+
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Viewbox Grid.Column="0" Margin="3,3,10,3"
+                                                                                HorizontalAlignment="Left">
+                                                                                <TextBox
+                                                                                    Width="300"
+                                                                                    Margin="15,3,10,3"
+                                                                                    FontSize="20"
+                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.IsFloating="True"
+                                                                                    Text="{Binding Name}" />
+
+                                                                            </Viewbox>
+                                                                            <Viewbox Grid.Column="1" Margin="5"
+                                                                                HorizontalAlignment="Right"
+                                                                                VerticalAlignment="Stretch">
+                                                                                <Button
+                                                                                    VerticalAlignment="Stretch"
+                                                                                    Margin="5"
+                                                                                    FontSize="15"
+                                                                                    Content="Change"
+                                                                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                                                                                    <i:Interaction.Triggers>
+                                                                                        <i:EventTrigger
+                                                                                            EventName="Click">
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=DesignProp}}" />
+                                                                                            <i:InvokeCommandAction
+                                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                                        </i:EventTrigger>
+                                                                                    </i:Interaction.Triggers>
+                                                                                </Button>
+                                                                            </Viewbox>
+
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </materialDesign:Flipper.BackContent>
+                                                            </materialDesign:Flipper>
+                                                        </materialDesign:Card>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+
+                                        </ScrollViewer>
+                                    </Viewbox>
+
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                    </materialDesign:Card>
                 </TabItem>
-                <TabItem>
+                <TabItem IsEnabled="{Binding User.CanPermission}">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
                             Height="auto">
                             <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
+                                Width="35"
+                                Height="35"
                                 HorizontalAlignment="Center"
-                                Kind="MusicBoxMultiple" />
+                                Kind="Account" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="Sounds" />
+                                Text="Users" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBlock>
-                        <Run
-                            Text="tab 4 content. Default look and behaviors." />
-                        <LineBreak />
-                        <LineBreak />
+                    <Grid>
+                        <materialDesign:Card Margin="3">
+                            <ListBox x:Name ="UsersList"  ItemsSource="{Binding Users}"
+                                     Style="{StaticResource MaterialDesignGridList}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:Card Margin="4">
 
-                    </TextBlock>
+
+                                            <materialDesign:Flipper
+                                                materialDesign:ElevationAssist.Elevation="Dp0"
+                                                Style="{StaticResource MaterialDesignCardFlipper}">
+                                                <materialDesign:Flipper.FrontContent>
+                                                    <Grid
+                                                        Width="200"
+                                                        Height="256">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition
+                                                                Height="160" />
+                                                            <RowDefinition
+                                                                Height="*" />
+                                                        </Grid.RowDefinitions>
+                                                        <materialDesign:ColorZone
+                                                            VerticalAlignment="Stretch"
+                                                            Mode="PrimaryLight">
+                                                            <materialDesign:PackIcon
+                                                                Width="128"
+                                                                Height="128"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                Kind="AccountCircle" />
+                                                        </materialDesign:ColorZone>
+                                                        <StackPanel
+                                                            Grid.Row="1"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="{Binding Name}" />
+                                                            <Button
+                                                                Margin="0,4,0,0"
+                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                Content="EDIT"
+                                                                Style="{StaticResource MaterialDesignFlatButton}" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </materialDesign:Flipper.FrontContent>
+                                                <materialDesign:Flipper.BackContent>
+                                                    <Grid
+                                                        Width="200"
+                                                        Height="256">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition
+                                                                Height="Auto" />
+                                                            <RowDefinition
+                                                                Height="*" />
+                                                        </Grid.RowDefinitions>
+                                                        <materialDesign:ColorZone
+                                                            Padding="6"
+                                                            Mode="SecondaryMid">
+                                                            <StackPanel
+                                                                Orientation="Horizontal">
+                                                                <Button
+                                                                    HorizontalAlignment="Left"
+                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger
+                                                                            EventName="Click">
+                                                                            <i:InvokeCommandAction
+                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=UsersList}}" />
+                                                                            <i:InvokeCommandAction
+                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
+
+                                                                    <materialDesign:PackIcon
+                                                                        HorizontalAlignment="Right"
+                                                                        Kind="ArrowLeft" />
+                                                                    
+                                                                </Button>
+                                                                <TextBlock
+                                                                    Margin="8,0,0,0"
+                                                                    VerticalAlignment="Center"
+                                                                    Text="EDIT USER" />
+                                                            </StackPanel>
+                                                        </materialDesign:ColorZone>
+                                                        <Grid
+                                                            Grid.Row="1"
+                                                            Width="172"
+                                                            Margin="0,6,0,0"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Top">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition />
+                                                                <RowDefinition />
+                                                                <RowDefinition />
+                                                                <RowDefinition />
+                                                            </Grid.RowDefinitions>
+                                                            <TextBox
+                                                                Margin="0,12,0,0"
+                                                                materialDesign:HintAssist.Hint="Name"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding Name}" />
+                                                            <TextBox
+                                                                Grid.Row="1"
+                                                                Margin="0,12,0,0"
+                                                                materialDesign:HintAssist.Hint="Password"
+                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                Text="{Binding Password}" />
+                                                            <StackPanel
+                                                                Grid.Row="2"
+                                                                Margin="0,12,0,0"
+                                                                HorizontalAlignment="Right"
+                                                                Orientation="Horizontal">
+                                                                <TextBlock
+                                                                    VerticalAlignment="Center"
+                                                                    Text="Can edit snakes" />
+                                                                <ToggleButton
+                                                                    IsChecked="{Binding CanEdit}"
+                                                                    Margin="8,0,0,0" />
+                                                            </StackPanel>
+                                                            <StackPanel
+                                                                Grid.Row="3"
+                                                                Margin="0,12,0,0"
+                                                                HorizontalAlignment="Right"
+                                                                Orientation="Horizontal">
+                                                                <TextBlock
+                                                                    VerticalAlignment="Center"
+                                                                    Text="Can add permissions" />
+                                                                <ToggleButton
+                                                                    IsChecked="{Binding CanPermission}"
+                                                                    Margin="8,0,0,0" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Grid>
+                                                </materialDesign:Flipper.BackContent>
+                                            </materialDesign:Flipper>
+                                        </materialDesign:Card>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                        </materialDesign:Card>
+
+                        <Button Margin="10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                                ToolTip="MaterialDesignFloatingActionLightButton"
+                                Command="{Binding AddUser}">
+
+                            <materialDesign:PackIcon
+                                Width="40"
+                                Height="40"
+                                Kind="Plus" />
+                        </Button>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </materialDesign:Card>

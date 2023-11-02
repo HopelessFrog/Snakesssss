@@ -13,7 +13,7 @@ namespace Snakesssss
         {
             base.OnStartup(e);
             DatabaseLocator.Context = new SnakeContext();
-            var window = new MainWindow();
+            var window = new LoginWindow();
             window.Show();
            
         }

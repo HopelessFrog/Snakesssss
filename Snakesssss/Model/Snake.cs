@@ -31,7 +31,7 @@ public class Snake : ViewModelBase
     public PoisonType PoisonType { get; set; }
     public Design Design { get; set; }
 
-    public int DangerausScore
+    public double DangerausScore
     {
         get;
         set;

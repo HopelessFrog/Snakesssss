@@ -19,10 +19,10 @@ namespace Snakesssss
     {
        
         IMainViewModel mainViewModel;
-        public MainWindow()
+        public MainWindow(IMainViewModel viewModel)
         {
             InitializeComponent();
-            mainViewModel = (IMainViewModel)DataContext;
+            mainViewModel = viewModel;
             mainViewModel.SetDefaultValue += MainViewModel_SetDefaultValue;
         }
 
@@ -30,6 +30,8 @@ namespace Snakesssss
         {
             AreasBox.SelectedItem = null;
             ColorsBox.SelectedItem = null;
+            RatingBar.Value = 0;
+
         }
 
         private void AreasBox_OnItemSelectionChanged(object sender, ItemSelectionChangedEventArgs e)
@@ -41,6 +43,26 @@ namespace Snakesssss
         {
             mainViewModel.SnakeForCreate.Colors = ColorsBox.SelectedItems.Cast<SnakeColor>().ToList();
 
+        }
+        private void AreasBox_OnItemSelectionChangedSearch(object sender, ItemSelectionChangedEventArgs e)
+        {
+            mainViewModel.SnakeForSearch.Areas = AreasBoxSearch.SelectedItems.Cast<Area>().ToList();
+
+        }
+        private void ColorsBox_OnItemSelectionChangedSearch(object sender, ItemSelectionChangedEventArgs e)
+        {
+            mainViewModel.SnakeForSearch.Colors = ColorsBoxSearch.SelectedItems.Cast<SnakeColor>().ToList();
+
+        }
+
+        private void RatingBar_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            mainViewModel.SnakeForCreate.DangerausScore = e.NewValue;
+        }
+
+        private void UIElement_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

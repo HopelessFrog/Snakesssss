@@ -10,6 +10,7 @@ namespace Snakesssss.ViewModels
     public interface IMainViewModel
     {
         Snake SnakeForCreate { get; set; }
+        Snake SnakeForSearch { get; set; }
         event EventHandler SetDefaultValue;
     }
 }

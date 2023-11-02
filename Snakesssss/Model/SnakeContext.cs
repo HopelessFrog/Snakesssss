@@ -29,5 +29,7 @@ namespace Snakesssss.Model
         public DbSet<PoisonType> PoisonTypes { get; set; }
 
         public DbSet<Design> Designs { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }
