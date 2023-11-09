@@ -21,6 +21,8 @@ namespace Snakesssss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
+
+
                     var user = DatabaseLocator.Context.Users.FirstOrDefault(u => u.Name == Name && u.Password == Password);
                     if (user != null)
                     {

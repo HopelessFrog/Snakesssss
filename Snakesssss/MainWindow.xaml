@@ -29,7 +29,7 @@
                                 Kind="Snake" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="All Snakes" />
+                                Text="Змеи" />
                         </StackPanel>
                     </TabItem.Header>
                     <materialDesign:Card Padding="5">
@@ -77,7 +77,7 @@
                                                                 </StackPanel>
                                                                 <StackPanel Orientation="Horizontal" Margin="2">
                                                                     <TextBox
-                                                                        materialDesign:HintAssist.Hint="Family"
+                                                                        materialDesign:HintAssist.Hint="Семейство"
                                                                         materialDesign:HintAssist.IsFloating="True"
                                                                         Text="{Binding Family.Name}" />
                                                                 </StackPanel>
@@ -85,7 +85,7 @@
                                                                 <Button
                                                                     Margin="0,4,0,0"
                                                                     Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                                    Content="INFO"
+                                                                    Content="Информация"
                                                                     Style="{StaticResource MaterialDesignFlatButton}" />
                                                             </StackPanel>
                                                         </Grid>
@@ -138,36 +138,36 @@
                                                                 <TextBox
                                                                     IsReadOnly="True"
                                                                     Margin="0,12,0,0"
-                                                                    materialDesign:HintAssist.Hint="Poison type"
+                                                                    materialDesign:HintAssist.Hint="Тип яда"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     Text="{Binding PoisonType.Name}" />
                                                                 <TextBox IsReadOnly="True"
                                                                          Grid.Row="1"
                                                                          Margin="0,12,0,0"
-                                                                         materialDesign:HintAssist.Hint="Design"
+                                                                         materialDesign:HintAssist.Hint="Узор"
                                                                          materialDesign:HintAssist.IsFloating="True"
                                                                          Text="{Binding Design.Name}" />
 
                                                                 <GroupBox Grid.Row="2"
                                                                           Margin="0,12,0,0"
                                                                           materialDesign:ColorZoneAssist.Mode="SecondaryMid"
-                                                                          Header="Amount of Posion"
+                                                                          Header="Количество яда"
                                                                           Style="{StaticResource MaterialDesignGroupBox}">
                                                                     <TextBlock
-                                                                        materialDesign:HintAssist.Hint="Amount of Poison"
+                                                                        materialDesign:HintAssist.Hint="Количество яда"
                                                                         materialDesign:HintAssist.IsFloating="True"
                                                                         Margin="0,12,0,0">
                                                                         <Run Text="{Binding MinAmountOfPoison}" />
                                                                         <Run Text="/" />
                                                                         <Run Text="{Binding MaxAmountOfPoison}" />
-                                                                        <Run Text=" mg" />
+                                                                        <Run Text=" мл" />
                                                                     </TextBlock>
 
                                                                 </GroupBox>
                                                                 <GroupBox Grid.Row="3"
                                                                           Margin="0,12,0,0"
                                                                           materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-                                                                          Header="Lenght"
+                                                                          Header="Длина"
                                                                           Style="{StaticResource MaterialDesignGroupBox}">
                                                                     <TextBlock
                                                                         materialDesign:HintAssist.Hint="Amount of Poison"
@@ -176,7 +176,7 @@
                                                                         <Run Text="{Binding MinLenght}" />
                                                                         <Run Text="/" />
                                                                         <Run Text="{Binding MaxLenght}" />
-                                                                        <Run Text=" sm" />
+                                                                        <Run Text=" см" />
                                                                     </TextBlock>
 
                                                                 </GroupBox>
@@ -184,7 +184,7 @@
                                                                     Grid.Row="4"
                                                                     Margin="0,12,0,0"
                                                                     HorizontalAlignment="Stretch"
-                                                                    Header="Areas">
+                                                                    Header="Ареал">
                                                                     <ListBox ItemsSource="{Binding Areas}"
                                                                              IsManipulationEnabled="False">
                                                                         <ListBox.ItemTemplate>
@@ -204,7 +204,7 @@
                                                                     Grid.Row="5"
                                                                     Margin="0,12,0,0"
                                                                     HorizontalAlignment="Stretch"
-                                                                    Header="Colors">
+                                                                    Header="Цвета">
                                                                     <ListBox ItemsSource="{Binding Colors}"
                                                                              Style="{StaticResource MaterialDesignGridList}"
                                                                              IsManipulationEnabled="False">
@@ -218,7 +218,7 @@
                                                                 </Expander>
                                                                 <StackPanel Grid.Row="6" Orientation="Vertical"
                                                                             HorizontalAlignment="Center">
-                                                                    <TextBlock>Dangerous Score</TextBlock>
+                                                                    <TextBlock>Рейтинг опасности</TextBlock>
                                                                     <materialDesign:RatingBar
                                                                         IsPreviewValueEnabled="True"
                                                                         Max="5"
@@ -371,7 +371,7 @@
                                                     HorizontalAlignment="Stretch"
                                                     VerticalAlignment="Center"
                                                     Margin=" 10 "
-                                                    materialDesign:HintAssist.Hint="Search....................................."
+                                                    materialDesign:HintAssist.Hint="Поиск....................................."
                                                     materialDesign:HintAssist.Foreground="Green"
                                                     materialDesign:TextFieldAssist.UnderlineBrush="Green"
                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -420,17 +420,17 @@
                                                     <Viewbox Grid.Row="0" Margin="5,0,5,0">
                                                         <StackPanel Orientation="Horizontal"
                                                                     HorizontalAlignment="Center">
-                                                            <Label FontSize="26" Padding="0,15,14,0">Lenght:</Label>
+                                                            <Label FontSize="26" Padding="0,15,14,0">Длинна:</Label>
                                                             <TextBox
                                                                 Margin="0,0,10,0"
                                                                 FontSize="20"
-                                                                materialDesign:HintAssist.Hint="Min"
+                                                                materialDesign:HintAssist.Hint="Мин"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding SnakeForSearch.MinLenght}" />
                                                             <TextBox
                                                                 Margin="0,0,10,0"
                                                                 FontSize="20"
-                                                                materialDesign:HintAssist.Hint="Max"
+                                                                materialDesign:HintAssist.Hint="Макс"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding SnakeForSearch.MaxLenght}" />
 
@@ -444,18 +444,18 @@
                                                                     IsEnabled="{Binding SelectedPoisonType}">
                                                             <TextBlock TextWrapping="Wrap" Padding="0,15,14,0"
                                                                        FontSize="20">
-                                                                Amount <LineBreak /> of poison:
+                                                                Количество <LineBreak /> яда:
                                                             </TextBlock>
                                                             <TextBox
                                                                 FontSize="20"
                                                                 Margin="0,0,10,0"
-                                                                materialDesign:HintAssist.Hint="Min"
+                                                                materialDesign:HintAssist.Hint="Мин"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding SnakeForSearch.MinAmountOfPoison}" />
                                                             <TextBox
                                                                 FontSize="20"
                                                                 Margin="0,0,10,0"
-                                                                materialDesign:HintAssist.Hint="Max"
+                                                                materialDesign:HintAssist.Hint="Макс"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding SnakeForSearch.MaxAmountOfPoison}" />
 
@@ -469,7 +469,7 @@
                                                             x:Name="AreasBoxSearch"
                                                             ItemSelectionChanged="AreasBox_OnItemSelectionChangedSearch"
                                                             FontSize="20"
-                                                            materialDesign:HintAssist.Hint="Areas"
+                                                            materialDesign:HintAssist.Hint="Ареал"
                                                             materialDesign:HintAssist.IsFloating="True"
                                                             ItemsSource="{Binding Areas}"
                                                             Width="200" />
@@ -480,7 +480,7 @@
                                                             x:Name="ColorsBoxSearch"
                                                             FontSize="20"
                                                             ItemSelectionChanged="ColorsBox_OnItemSelectionChangedSearch"
-                                                            materialDesign:HintAssist.Hint="Colors"
+                                                            materialDesign:HintAssist.Hint="Цвета"
                                                             materialDesign:HintAssist.IsFloating="True"
                                                             ItemsSource="{Binding Colors}"
                                                             Width="200">
@@ -499,7 +499,7 @@
                                                     <Viewbox Grid.Row="3" Margin="5,0,5,0">
                                                         <ComboBox Margin="0" Padding="0"
                                                                   SelectedIndex="0"
-                                                                  materialDesign:HintAssist.Hint="Family"
+                                                                  materialDesign:HintAssist.Hint="Семейство"
                                                                   materialDesign:HintAssist.IsFloating="True"
                                                                   FontSize="20" Width="200" Height="60"
                                                                   ItemsSource="{Binding Familyes}"
@@ -508,7 +508,7 @@
                                                     <Viewbox Grid.Row="4" Margin="5,0,5,0">
                                                         <ComboBox Margin="0" Padding="0"
                                                                   SelectedIndex="0"
-                                                                  materialDesign:HintAssist.Hint="Poison Type"
+                                                                  materialDesign:HintAssist.Hint="Тип яда"
                                                                   materialDesign:HintAssist.IsFloating="True"
                                                                   FontSize="20" Width="200" Height="60"
                                                                   ItemsSource="{Binding PoisonTypes}"
@@ -517,7 +517,7 @@
                                                     <Viewbox Grid.Row="6" Margin="5,0,5,0">
                                                         <ComboBox Margin="0" Padding="0"
                                                                   SelectedIndex="0"
-                                                                  materialDesign:HintAssist.Hint="Design"
+                                                                  materialDesign:HintAssist.Hint="Узор"
                                                                   materialDesign:HintAssist.IsFloating="True"
                                                                   FontSize="20" Width="200" Height="60"
                                                                   ItemsSource="{Binding Designs}"
@@ -536,7 +536,7 @@
                         </Grid>
                     </materialDesign:Card>
                 </TabItem>
-                <TabItem IsEnabled="True">
+                <TabItem IsEnabled="False" Visibility="Collapsed">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
@@ -597,7 +597,7 @@
                                             </StackPanel>
                                         </Grid>
                                     </materialDesign:Flipper.FrontContent>
-                                    <materialDesign:Flipper.BackContent >
+                                    <materialDesign:Flipper.BackContent>
                                         <Grid
                                             MinWidth="200"
                                             MinHeight="256">
@@ -769,7 +769,7 @@
                                 Kind="PlusCircle" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="Add Snake" />
+                                Text="Добавить" />
                         </StackPanel>
                     </TabItem.Header>
                     <materialDesign:Card>
@@ -798,7 +798,7 @@
                                             <Viewbox>
                                                 <StackPanel>
                                                     <TextBlock HorizontalAlignment="Center" FontSize="20">
-                                                        Snake
+                                                        Змею
                                                     </TextBlock>
                                                     <materialDesign:ColorZone
                                                         CornerRadius="15"
@@ -871,7 +871,7 @@
                                                     <TextBlock
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center"
-                                                        Text="ADD SNAKE" />
+                                                        Text="Добавление Змеи" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
                                             <Grid
@@ -926,7 +926,7 @@
                                                                 Width="100"
                                                                 Margin="0"
                                                                 Padding="2"
-                                                                materialDesign:HintAssist.Hint="Name"
+                                                                materialDesign:HintAssist.Hint="Название"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding SnakeForCreate.Name}" />
 
@@ -935,15 +935,15 @@
                                                         <Viewbox Grid.Row="2" Margin="5,0,5,0">
                                                             <StackPanel Orientation="Horizontal"
                                                                         HorizontalAlignment="Center">
-                                                                <Label Padding="0,15,14,0">Lenght:</Label>
+                                                                <Label Padding="0,15,14,0">Длинна:</Label>
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
-                                                                    materialDesign:HintAssist.Hint="Min"
+                                                                    materialDesign:HintAssist.Hint="Мин"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     Text="{Binding SnakeForCreate.MinLenght}" />
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
-                                                                    materialDesign:HintAssist.Hint="Max"
+                                                                    materialDesign:HintAssist.Hint="Макс"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     Text="{Binding SnakeForCreate.MaxLenght}" />
 
@@ -956,16 +956,16 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock TextWrapping="Wrap" Padding="0,15,14,0"
                                                                            FontSize="8">
-                                                                    Amount <LineBreak /> of poison:
+                                                                    Количество <LineBreak /> яда:
                                                                 </TextBlock>
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
-                                                                    materialDesign:HintAssist.Hint="Min"
+                                                                    materialDesign:HintAssist.Hint="Мин"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     Text="{Binding SnakeForCreate.MinAmountOfPoison}" />
                                                                 <TextBox
                                                                     Margin="0,0,10,0"
-                                                                    materialDesign:HintAssist.Hint="Max"
+                                                                    materialDesign:HintAssist.Hint="Макс"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     Text="{Binding SnakeForCreate.MaxAmountOfPoison}" />
 
@@ -979,7 +979,7 @@
                                                                 x:Name="AreasBox"
                                                                 ItemSelectionChanged="AreasBox_OnItemSelectionChanged"
 
-                                                                materialDesign:HintAssist.Hint="Areas"
+                                                                materialDesign:HintAssist.Hint="Ареал"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 ItemsSource="{Binding Areas}"
                                                                 Width="100" />
@@ -989,7 +989,7 @@
                                                             <xctk:CheckComboBox
                                                                 x:Name="ColorsBox"
                                                                 ItemSelectionChanged="ColorsBox_OnItemSelectionChanged"
-                                                                materialDesign:HintAssist.Hint="Colors"
+                                                                materialDesign:HintAssist.Hint="Цвета"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 ItemsSource="{Binding Colors}"
                                                                 Width="100">
@@ -1007,7 +1007,7 @@
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="6" Margin="5,0,5,0">
                                                             <ComboBox Margin="0" Padding="0"
-                                                                      materialDesign:HintAssist.Hint="Family"
+                                                                      materialDesign:HintAssist.Hint="Семейство"
                                                                       materialDesign:HintAssist.IsFloating="True"
                                                                       FontSize="15" Width="100" Height="50"
                                                                       ItemsSource="{Binding Familyes}"
@@ -1015,7 +1015,7 @@
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="7" Margin="5,0,5,0">
                                                             <ComboBox Margin="0" Padding="0"
-                                                                      materialDesign:HintAssist.Hint="Poison Type"
+                                                                      materialDesign:HintAssist.Hint="Тип яда"
                                                                       materialDesign:HintAssist.IsFloating="True"
                                                                       FontSize="15" Width="100" Height="50"
                                                                       ItemsSource="{Binding PoisonTypes}"
@@ -1023,7 +1023,7 @@
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="8" Margin="5,0,5,0">
                                                             <ComboBox Margin="0" Padding="0"
-                                                                      materialDesign:HintAssist.Hint="Design"
+                                                                      materialDesign:HintAssist.Hint="Узор"
                                                                       materialDesign:HintAssist.IsFloating="True"
                                                                       FontSize="15" Width="100" Height="50"
                                                                       ItemsSource="{Binding Designs}"
@@ -1032,10 +1032,10 @@
                                                         <Viewbox Grid.Row="9" Margin="5">
                                                             <StackPanel Orientation="Vertical"
                                                                         HorizontalAlignment="Center">
-                                                                <TextBlock>Dangerous Score</TextBlock>
+                                                                <TextBlock>Рейтинг Опастности</TextBlock>
                                                                 <materialDesign:RatingBar
                                                                     x:Name="RatingBar"
-                                                                    materialDesign:HintAssist.Hint="Dangerous Score"
+                                                                    materialDesign:HintAssist.Hint="Рейтинг опасности"
                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                     IsPreviewValueEnabled="True"
                                                                     Max="5"
@@ -1047,7 +1047,7 @@
                                                             </StackPanel>
 
                                                         </Viewbox>
-                                                        <Viewbox Grid.Row="10">
+                                                        <Viewbox Grid.Row="10" IsEnabled="False" Visibility="Collapsed">
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Margin="0,5,0,5" Text="Ai Folder" />
                                                                 <ToggleButton
@@ -1059,7 +1059,7 @@
                                                         <Viewbox Grid.Row="11" Margin="10">
                                                             <Button
                                                                 HorizontalAlignment="Left"
-                                                                Content="ADD">
+                                                                Content="Добавить">
                                                                 <i:Interaction.Triggers>
                                                                     <i:EventTrigger EventName="Click">
                                                                         <i:InvokeCommandAction
@@ -1110,7 +1110,7 @@
 
                                                 <StackPanel>
                                                     <TextBlock Margin="5" HorizontalAlignment="Center" FontSize="20">
-                                                        Posion
+                                                        Тип яда
                                                     </TextBlock>
                                                     <materialDesign:ColorZone
                                                         CornerRadius="15"
@@ -1167,6 +1167,8 @@
                                                     Height="*" />
                                                 <RowDefinition
                                                     Height="*" />
+                                                <RowDefinition
+                                                    Height="*" />
                                             </Grid.RowDefinitions>
                                             <materialDesign:ColorZone
                                                 Padding="6"
@@ -1185,7 +1187,7 @@
                                                     <TextBlock
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center"
-                                                        Text="Add Poison" />
+                                                        Text="Добавление яда" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
                                             <Viewbox Grid.Row="1" Margin="5,0,5,0">
@@ -1193,15 +1195,26 @@
                                                     Width="100"
                                                     Margin="0"
                                                     Padding="2"
-                                                    materialDesign:HintAssist.Hint="Name"
+                                                    materialDesign:HintAssist.Hint="Название"
                                                     materialDesign:HintAssist.IsFloating="True"
                                                     Text="{Binding PoisonTypeForCreate.Name}" />
 
                                             </Viewbox>
-                                            <Viewbox Grid.Row="2" Margin="10">
+                                            <Viewbox Grid.Row="2" Margin="5,0,5,0">
+                                                <TextBox TextWrapping="Wrap"
+                                                         AcceptsReturn="True"
+                                                         Width="100"
+                                                         Margin="0"
+                                                         Padding="2"
+                                                         materialDesign:HintAssist.Hint="Описание"
+                                                         materialDesign:HintAssist.IsFloating="True"
+                                                         Text="{Binding PoisonTypeForCreate.Description}" />
+
+                                            </Viewbox>
+                                            <Viewbox Grid.Row="3" Margin="10">
                                                 <Button
                                                     HorizontalAlignment="Left"
-                                                    Content="ADD">
+                                                    Content="Добавить">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction
@@ -1248,7 +1261,7 @@
 
                                                 <StackPanel>
                                                     <TextBlock Margin="5" HorizontalAlignment="Center" FontSize="20">
-                                                        Area
+                                                        Ареал
                                                     </TextBlock>
                                                     <materialDesign:ColorZone
                                                         CornerRadius="15"
@@ -1322,7 +1335,7 @@
                                                     <TextBlock
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center"
-                                                        Text="ADD AREA" />
+                                                        Text="Добавление ареала" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
                                             <Viewbox Grid.Row="1" Margin="5,0,5,0">
@@ -1330,7 +1343,7 @@
                                                     Width="100"
                                                     Margin="0"
                                                     Padding="2"
-                                                    materialDesign:HintAssist.Hint="Name"
+                                                    materialDesign:HintAssist.Hint="Название"
                                                     materialDesign:HintAssist.IsFloating="True"
                                                     Text="{Binding AreaForCreate.Name}" />
 
@@ -1338,7 +1351,7 @@
                                             <Viewbox Grid.Row="2" Margin="10">
                                                 <Button
                                                     HorizontalAlignment="Left"
-                                                    Content="ADD">
+                                                    Content="Добавить">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction
@@ -1383,7 +1396,7 @@
 
                                                 <StackPanel>
                                                     <TextBlock Margin="5" HorizontalAlignment="Center" FontSize="20">
-                                                        Family
+                                                        Семейство
                                                     </TextBlock>
                                                     <materialDesign:ColorZone
                                                         CornerRadius="15"
@@ -1457,7 +1470,7 @@
                                                     <TextBlock
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center"
-                                                        Text="ADD FAMILY" />
+                                                        Text="Добавление семейства" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
                                             <Viewbox Grid.Row="1" Margin="5,0,5,0">
@@ -1465,7 +1478,7 @@
                                                     Width="100"
                                                     Margin="0"
                                                     Padding="2"
-                                                    materialDesign:HintAssist.Hint="Name"
+                                                    materialDesign:HintAssist.Hint="Название"
                                                     materialDesign:HintAssist.IsFloating="True"
                                                     Text="{Binding FamilyForCreate.Name}" />
 
@@ -1473,7 +1486,7 @@
                                             <Viewbox Grid.Row="2" Margin="10">
                                                 <Button
                                                     HorizontalAlignment="Left"
-                                                    Content="ADD">
+                                                    Content="Добавить">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction
@@ -1518,7 +1531,7 @@
 
                                                 <StackPanel>
                                                     <TextBlock Margin="5" HorizontalAlignment="Center" FontSize="20">
-                                                        Design
+                                                        Узор
                                                     </TextBlock>
                                                     <materialDesign:ColorZone
                                                         CornerRadius="15"
@@ -1592,7 +1605,7 @@
                                                     <TextBlock
                                                         Margin="8,0,0,0"
                                                         VerticalAlignment="Center"
-                                                        Text="ADD DESIGN" />
+                                                        Text="Добавление узора" />
                                                 </StackPanel>
                                             </materialDesign:ColorZone>
 
@@ -1601,7 +1614,7 @@
                                                     Width="100"
                                                     Margin="0"
                                                     Padding="2"
-                                                    materialDesign:HintAssist.Hint="Name"
+                                                    materialDesign:HintAssist.Hint="Название"
                                                     materialDesign:HintAssist.IsFloating="True"
                                                     Text="{Binding DesignForCreate.Name}" />
 
@@ -1609,7 +1622,7 @@
                                             <Viewbox Grid.Row="2" Margin="10">
                                                 <Button
                                                     HorizontalAlignment="Left"
-                                                    Content="ADD">
+                                                    Content="Добавить">
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="Click">
                                                             <i:InvokeCommandAction
@@ -1653,7 +1666,7 @@
                                 Kind="Archive" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="Properties" />
+                                Text="Свойства" />
                         </StackPanel>
                     </TabItem.Header>
                     <materialDesign:Card Margin="2">
@@ -1679,7 +1692,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="BottleTonicSkull" Height="75" Width="75" />
                                                 <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
-                                                           FontSize="24" VerticalAlignment="Center" Text="Poison Types" />
+                                                           FontSize="24" VerticalAlignment="Center" Text="Типы ядов" />
                                             </StackPanel>
                                         </materialDesign:ColorZone>
                                     </Viewbox>
@@ -1695,7 +1708,7 @@
                                                 </ListBox.ItemContainerStyle>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <materialDesign:Card Width="1400" Height="300" Margin="10">
+                                                        <materialDesign:Card Width="1400" Height="1000" Margin="10">
                                                             <materialDesign:Flipper
                                                                 Margin="5"
                                                                 materialDesign:ElevationAssist.Elevation="Dp0"
@@ -1703,21 +1716,46 @@
                                                                 <materialDesign:Flipper.FrontContent>
                                                                     <Grid
                                                                         Width="1400"
-                                                                        Height="300">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="3*" />
-                                                                            <ColumnDefinition Width="*" />
+                                                                        Height="700">
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="*"/>
+                                                                            <RowDefinition Height="1.5*"/>
+                                                                        </Grid.RowDefinitions>
+                                                                        <Grid Grid.Row="0">
 
-                                                                        </Grid.ColumnDefinitions>
 
-                                                                        <Viewbox Grid.Column="0"
-                                                                            HorizontalAlignment="Left" Margin="3">
-                                                                            <TextBlock
-                                                                                Margin="15,3,10,3"
-                                                                                Text="{Binding Name}"
-                                                                                VerticalAlignment="Stretch"
-                                                                                FontSize="20" />
-                                                                        </Viewbox>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="3*" />
+                                                                                <ColumnDefinition Width="*" />
+
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Grid Grid.Column="0">
+                                                                                <Grid.RowDefinitions>
+                                                                                    <RowDefinition Height="2*" />
+                                                                                    <RowDefinition Height="*" />
+
+                                                                                </Grid.RowDefinitions>
+                                                                                <Viewbox Grid.Row="0"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Margin="3">
+                                                                                        <TextBlock
+                                                                                            Margin="15,3,10,3"
+                                                                                            Text="{Binding Name}"
+                                                                                            VerticalAlignment="Stretch"
+                                                                                            FontSize="20" />
+                                                                                </Viewbox>
+
+                                                                            </Grid>
+                                                                        </Grid>
+                                                                        <Grid Grid.Row="1" Width="1000">
+                                                                            <Viewbox Width="1000" HorizontalAlignment="Stretch">
+                                                                                <GroupBox Width="1000" Header="Описание"  HorizontalAlignment="Stretch">
+                                                                                    <TextBlock FontStretch="SemiExpanded" Text ="{Binding Description}">
+                                                                                    </TextBlock>
+                                                                                </GroupBox>
+                                                                            </Viewbox>
+                                                                        </Grid>
+
                                                                         <Viewbox Grid.Column="1">
                                                                             <StackPanel VerticalAlignment="Center"
                                                                                 HorizontalAlignment="Right">
@@ -1752,7 +1790,7 @@
                                                                 <materialDesign:Flipper.BackContent>
                                                                     <Grid
                                                                         Width="1400"
-                                                                        Height="300">
+                                                                        Height="1000">
                                                                         <Grid.RowDefinitions>
                                                                             <RowDefinition
                                                                                 Height="*" />
@@ -1782,7 +1820,7 @@
                                                                                     FontSize="50"
                                                                                     Margin="8,0,0,0"
                                                                                     VerticalAlignment="Center"
-                                                                                    Text="EDIT POISON TYPE" />
+                                                                                    Text="" />
                                                                             </StackPanel>
                                                                         </materialDesign:ColorZone>
                                                                         <Grid
@@ -1802,7 +1840,7 @@
                                                                                     Width="300"
                                                                                     Margin="15,3,10,3"
                                                                                     FontSize="20"
-                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.Hint="Название"
                                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                                     Text="{Binding Name}" />
 
@@ -1857,7 +1895,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="MapMarker" Height="75" Width="75" />
                                                 <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
-                                                           FontSize="24" VerticalAlignment="Center" Text="Areas" />
+                                                           FontSize="24" VerticalAlignment="Center" Text="Ареалы" />
                                             </StackPanel>
                                         </materialDesign:ColorZone>
                                     </Viewbox>
@@ -1960,7 +1998,7 @@
                                                                                     FontSize="50"
                                                                                     Margin="8,0,0,0"
                                                                                     VerticalAlignment="Center"
-                                                                                    Text="EDIT AREA" />
+                                                                                    Text="" />
                                                                             </StackPanel>
                                                                         </materialDesign:ColorZone>
                                                                         <Grid
@@ -1980,7 +2018,7 @@
                                                                                     Width="300"
                                                                                     Margin="15,3,10,3"
                                                                                     FontSize="20"
-                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.Hint="Название"
                                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                                     Text="{Binding Name}" />
 
@@ -2035,7 +2073,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="FamilyTree" Height="75" Width="75" />
                                                 <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
-                                                           FontSize="24" VerticalAlignment="Center" Text="Familys" />
+                                                           FontSize="24" VerticalAlignment="Center" Text="Семейства" />
                                             </StackPanel>
                                         </materialDesign:ColorZone>
                                     </Viewbox>
@@ -2138,7 +2176,7 @@
                                                                                     FontSize="50"
                                                                                     Margin="8,0,0,0"
                                                                                     VerticalAlignment="Center"
-                                                                                    Text="EDIT FAMILY" />
+                                                                                    Text="" />
                                                                             </StackPanel>
                                                                         </materialDesign:ColorZone>
                                                                         <Grid
@@ -2158,7 +2196,7 @@
                                                                                     Width="300"
                                                                                     Margin="15,3,10,3"
                                                                                     FontSize="20"
-                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.Hint="Название"
                                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                                     Text="{Binding Name}" />
 
@@ -2213,7 +2251,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Brush" Height="75" Width="75" />
                                                 <TextBlock Style="{StaticResource MaterialDesignHeadline1TextBlock}"
-                                                           FontSize="24" VerticalAlignment="Center" Text="Designs" />
+                                                           FontSize="24" VerticalAlignment="Center" Text="Узоры" />
                                             </StackPanel>
                                         </materialDesign:ColorZone>
                                     </Viewbox>
@@ -2316,7 +2354,7 @@
                                                                                     FontSize="50"
                                                                                     Margin="8,0,0,0"
                                                                                     VerticalAlignment="Center"
-                                                                                    Text="EDIT Design" />
+                                                                                    Text="" />
                                                                             </StackPanel>
                                                                         </materialDesign:ColorZone>
                                                                         <Grid
@@ -2336,7 +2374,7 @@
                                                                                     Width="300"
                                                                                     Margin="15,3,10,3"
                                                                                     FontSize="20"
-                                                                                    materialDesign:HintAssist.Hint="Name"
+                                                                                    materialDesign:HintAssist.Hint="Название"
                                                                                     materialDesign:HintAssist.IsFloating="True"
                                                                                     Text="{Binding Name}" />
 
@@ -2391,8 +2429,9 @@
                                 HorizontalAlignment="Center"
                                 Kind="Account" />
                             <TextBlock
+                                FontSize="10"
                                 HorizontalAlignment="Center"
-                                Text="Users" />
+                                Text="Пользователи" />
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
@@ -2436,7 +2475,7 @@
                                                             <Button
                                                                 Margin="0,4,0,0"
                                                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                                Content="EDIT"
+                                                                Content="Редактировать"
                                                                 Style="{StaticResource MaterialDesignFlatButton}" />
                                                         </StackPanel>
                                                     </Grid>
@@ -2478,7 +2517,7 @@
                                                                 <TextBlock
                                                                     Margin="8,0,0,0"
                                                                     VerticalAlignment="Center"
-                                                                    Text="EDIT USER" />
+                                                                    Text="" />
                                                             </StackPanel>
                                                         </materialDesign:ColorZone>
                                                         <Grid
@@ -2495,13 +2534,13 @@
                                                             </Grid.RowDefinitions>
                                                             <TextBox
                                                                 Margin="0,12,0,0"
-                                                                materialDesign:HintAssist.Hint="Name"
+                                                                materialDesign:HintAssist.Hint="Название"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding Name}" />
                                                             <TextBox
                                                                 Grid.Row="1"
                                                                 Margin="0,12,0,0"
-                                                                materialDesign:HintAssist.Hint="Password"
+                                                                materialDesign:HintAssist.Hint="Пароль"
                                                                 materialDesign:HintAssist.IsFloating="True"
                                                                 Text="{Binding Password}" />
                                                             <StackPanel
@@ -2511,7 +2550,7 @@
                                                                 Orientation="Horizontal">
                                                                 <TextBlock
                                                                     VerticalAlignment="Center"
-                                                                    Text="Can edit snakes" />
+                                                                    Text="Редактирование" />
                                                                 <ToggleButton
                                                                     IsChecked="{Binding CanEdit}"
                                                                     Margin="8,0,0,0" />
@@ -2523,7 +2562,7 @@
                                                                 Orientation="Horizontal">
                                                                 <TextBlock
                                                                     VerticalAlignment="Center"
-                                                                    Text="Can add permissions" />
+                                                                    Text="Админестрирование" />
                                                                 <ToggleButton
                                                                     IsChecked="{Binding CanPermission}"
                                                                     Margin="8,0,0,0" />

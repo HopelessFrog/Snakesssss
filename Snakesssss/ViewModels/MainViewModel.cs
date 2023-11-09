@@ -377,7 +377,7 @@ namespace Snakesssss.ViewModels
                     if (SnakeForSearch.Family != null && SnakeForSearch.Family.Name != "none")
                         conditionsSnakes.Add(s => s.Family.Name == SnakeForSearch.Family.Name);
                     if (SnakeForSearch.PoisonType != null && SnakeForSearch.PoisonType.Name != "none")
-                        conditionsSnakes.Add(s => s.Family.Name == SnakeForSearch.PoisonType.Name);
+                        conditionsSnakes.Add(s => s.PoisonType.Name == SnakeForSearch.PoisonType.Name);
                     if (SnakeForSearch.Areas != null &&   SnakeForSearch.Areas.Count != 0)
                         conditionsSnakes.Add(s => s.Areas.Any(c => SnakeForSearch.Areas.Contains(c)));
                     if (SnakeForSearch.Colors!= null &&   SnakeForSearch.Colors.Count != 0)
