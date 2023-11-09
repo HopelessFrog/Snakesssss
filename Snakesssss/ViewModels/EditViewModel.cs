@@ -92,6 +92,7 @@ namespace Snakesssss.ViewModels
                 {
                     if(CanClose())
                     {
+                        DatabaseLocator.Context.SaveChanges();
                         Close?.Invoke();
                     }
                     else

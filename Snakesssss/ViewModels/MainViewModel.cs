@@ -19,6 +19,7 @@ using static MaterialDesignThemes.Wpf.Theme;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq.Expressions;
 using System.Windows;
 
@@ -70,7 +71,7 @@ namespace Snakesssss.ViewModels
 
         public Family FamilyForCreate { get; set; }
 
-        private string defaultImage = @"C:\Users\leaha\source\repos\Snakesssss\Snakesssss\Images\images.jpg";
+        private string defaultImage = @"C:\Users\User\Source\Repos\Snakesssss\Snakesssss\Images\images.jpg";
        
         public ObservableCollection<Snake> Snakes { get; set; }
 
@@ -183,7 +184,7 @@ namespace Snakesssss.ViewModels
                 }
                
                
-               // Search.Execute(this);
+                Search.Execute(this);
             }); }
         }
 
@@ -499,6 +500,39 @@ namespace Snakesssss.ViewModels
 
             }); }
         }
+        public Snake AiSnake { get; set; }
+        public string Result { get; set; }
+        public Visibility SnakeRdy { get; set; } 
+        public ICommand FindSnake
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+
+                    Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+                    openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        MLModelSnakes.ModelInput sampleData = new MLModelSnakes.ModelInput()
+                        {
+                            ImageSource = File.ReadAllBytes(openFileDialog.FileName)
+                        };
+                        Result =  MLModelSnakes.Predict(sampleData).PredictedLabel;
+                        var qwe = DatabaseLocator.Context.Snakes.ToList();
+                        AiSnake = qwe.Find(s => s.Name.Contains(Result));
+                    //    AiSnake =   DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
+                        SnakeRdy = Visibility.Visible;
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+
+                });
+            }
+        }
         public ICommand DeleteSnake
         {
             get
@@ -616,6 +650,7 @@ namespace Snakesssss.ViewModels
 
 
             Search.Execute(this);
+            SnakeRdy = Visibility.Hidden;
         }
     }
 }
