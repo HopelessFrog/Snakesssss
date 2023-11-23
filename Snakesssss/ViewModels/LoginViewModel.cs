@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using Snakesssss.Model;
@@ -22,7 +23,7 @@ namespace Snakesssss.ViewModels
                 return new DelegateCommand(() =>
                 {
 
-
+                  
                     var user = DatabaseLocator.Context.Users.FirstOrDefault(u => u.Name == Name && u.Password == Password);
                     if (user != null)
                     {
@@ -31,6 +32,11 @@ namespace Snakesssss.ViewModels
                         window.DataContext = viewModel;
                         window.Show();
                         Close();
+                    }
+                    else
+                    {
+                        Xceed.Wpf.Toolkit.MessageBox.Show("Неправильный логин или пароль", "",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                 });

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Brush = System.Windows.Media.Brush;
 using Color = System.Windows.Media.Color;
 
 namespace Snakesssss.Model

@@ -38,7 +38,7 @@
                         <TextBlock
                             Margin="8,0,0,0"
                             VerticalAlignment="Center"
-                            Text="EDIT SNAKE" />
+                            Text="Редактирование" />
                     </StackPanel>
                 </materialDesign:ColorZone>
                 <Grid
@@ -90,7 +90,7 @@
                                 Width="200"
                                 Margin="0"
                                 Padding="2"
-                                materialDesign:HintAssist.Hint="Name"
+                                materialDesign:HintAssist.Hint="Название"
                                 materialDesign:HintAssist.IsFloating="True"
                                 Text="{Binding Snake.Name}" />
 
@@ -99,17 +99,17 @@
                         <Viewbox Grid.Row="2" HorizontalAlignment="Left" Margin="5,0,5,0">
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center" Width="300">
-                                <Label FontSize="30" Padding="0,30,14,0">Lenght:</Label>
+                                <Label FontSize="30" Padding="0,30,14,0">Длинна:</Label>
                                 <TextBox
                                     FontSize="30"
                                     Margin="0,0,10,0"
-                                    materialDesign:HintAssist.Hint="Min"
+                                    materialDesign:HintAssist.Hint="Мин"
                                     materialDesign:HintAssist.IsFloating="True"
                                     Text="{Binding Snake.MinLenght}" />
                                 <TextBox
                                     FontSize="30"
                                     Margin="0,0,10,0"
-                                    materialDesign:HintAssist.Hint="Max"
+                                    materialDesign:HintAssist.Hint="Макс"
                                     materialDesign:HintAssist.IsFloating="True"
                                     Text="{Binding Snake.MaxLenght}" />
 
@@ -122,18 +122,18 @@
                                         HorizontalAlignment="Center" Width="400">
                                 <TextBlock TextWrapping="Wrap" Padding="0,15,14,0"
                                            FontSize="30">
-                                    Amount <LineBreak /> of poison:
+                                    Колличство <LineBreak /> яда:
                                 </TextBlock>
                                 <TextBox
                                     FontSize="30"
                                     Margin="0,0,10,0"
-                                    materialDesign:HintAssist.Hint="Min"
+                                    materialDesign:HintAssist.Hint="Мин"
                                     materialDesign:HintAssist.IsFloating="True"
                                     Text="{Binding Snake.MinAmountOfPoison}" />
                                 <TextBox
                                     FontSize="30"
                                     Margin="0,0,10,0"
-                                    materialDesign:HintAssist.Hint="Max"
+                                    materialDesign:HintAssist.Hint="Макс"
                                     materialDesign:HintAssist.IsFloating="True"
                                     Text="{Binding Snake.MaxAmountOfPoison}" />
 
@@ -147,7 +147,7 @@
                                 x:Name="AreasBox"
                                 ItemSelectionChanged="AreasBox_OnItemSelectionChanged"
                                 FontSize="30"
-                                materialDesign:HintAssist.Hint="Areas"
+                                materialDesign:HintAssist.Hint="Ареалы"
                                 materialDesign:HintAssist.IsFloating="True"
                                 ItemsSource="{Binding Areas}"
                                 Width="384" Height="83"
@@ -158,7 +158,7 @@
                             <xctk:CheckComboBox
                                 ItemSelectionChanged="ColorsBox_OnItemSelectionChanged"
                                 x:Name="ColorsBox"
-                                materialDesign:HintAssist.Hint="Colors"
+                                materialDesign:HintAssist.Hint="Цвета"
                                 materialDesign:HintAssist.IsFloating="True"
                                 ItemsSource="{Binding Colors}"
                                 FontSize="30"
@@ -177,7 +177,7 @@
                         </Viewbox>
                         <Viewbox Grid.Row="6" HorizontalAlignment="Left" Margin="5,0,5,0">
                             <ComboBox Margin="0" Padding="0"
-                                      materialDesign:HintAssist.Hint="Family"
+                                      materialDesign:HintAssist.Hint="Семейство"
                                       materialDesign:HintAssist.IsFloating="True"
                                       FontSize="20" Width="200" Height="50"
                                       ItemsSource="{Binding Familyes}"
@@ -185,7 +185,7 @@
                         </Viewbox>
                         <Viewbox HorizontalAlignment="Left" Grid.Row="7" Margin="5,0,5,0">
                             <ComboBox Margin="0" Padding="0"
-                                      materialDesign:HintAssist.Hint="Poison Type"
+                                      materialDesign:HintAssist.Hint="Тип яда"
                                       materialDesign:HintAssist.IsFloating="True"
                                       FontSize="20" Width="200" Height="50"
                                       ItemsSource="{Binding PoisonTypes}"
@@ -193,7 +193,7 @@
                         </Viewbox>
                         <Viewbox HorizontalAlignment="Left" Grid.Row="8" Margin="5,0,5,0">
                             <ComboBox Margin="0" Padding="0"
-                                      materialDesign:HintAssist.Hint="Design"
+                                      materialDesign:HintAssist.Hint="Узор"
                                       materialDesign:HintAssist.IsFloating="True"
                                       FontSize="20" Width="200" Height="50"
                                       ItemsSource="{Binding Designs}"
@@ -204,7 +204,7 @@
                                         HorizontalAlignment="Center">
                                 <TextBlock>Dangerous Score</TextBlock>
                                 <materialDesign:RatingBar
-                                    materialDesign:HintAssist.Hint="Dangerous Score"
+                                    materialDesign:HintAssist.Hint="Рейтинг опастности"
                                     materialDesign:HintAssist.IsFloating="True"
                                     IsPreviewValueEnabled="True"
                                     Max="5"
@@ -227,7 +227,7 @@
                         <Viewbox HorizontalAlignment="Center" Grid.Row="11" Margin="5">
                             <Button
                                 HorizontalAlignment="Left"
-                                Content="Change"
+                                Content="Изменить"
                                 Command="{Binding Edit}">
                                 
                             </Button>
