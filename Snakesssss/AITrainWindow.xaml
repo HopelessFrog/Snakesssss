@@ -1,0 +1,68 @@
+﻿<Window x:Class="Snakesssss.AITrainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snakesssss"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        FontFamily="Segoe UI Emoji"
+        Title="AITrainWindow" Height="700" Width="450">
+    <Grid>
+        <materialDesign:Card Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <TextBox 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    MinWidth="300"
+                    IsHitTestVisible="True"
+                    IsReadOnly="True"
+                    FontSize="25"
+                    materialDesign:HintAssist.Hint="Название"
+                    materialDesign:HintAssist.IsFloating="True"/>
+                <Grid Grid.Row="1">
+                    <materialDesign:Card Margin="10">
+                        <Grid>
+                            <Button 
+                                Margin="40"
+                                FontSize="35"
+                                MinHeight="50"
+                                VerticalAlignment="Stretch"
+                                Content="Выбрать данные"/>
+                            <ToggleButton HorizontalAlignment="Right" Style="{StaticResource MaterialDesignActionToggleButton}" VerticalAlignment="Bottom"></ToggleButton>
+
+                        </Grid>
+                     
+
+                    </materialDesign:Card>
+                   
+                    
+
+                </Grid>
+                <Button
+                    Grid.Row="2"
+                    Margin="40"
+                    FontSize="35"
+                    MinHeight="50"
+                    VerticalAlignment="Stretch"
+                    Content="Обучить"/>
+
+
+
+
+</Grid>
+
+        </materialDesign:Card>
+        
+    </Grid>
+</Window>

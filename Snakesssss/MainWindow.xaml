@@ -536,7 +536,7 @@
                         </Grid>
                     </materialDesign:Card>
                 </TabItem>
-                <TabItem IsEnabled="False" Visibility="Collapsed">
+                <TabItem IsEnabled="True" Visibility="Visible">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
@@ -1696,9 +1696,8 @@
                                             </StackPanel>
                                         </materialDesign:ColorZone>
                                     </Viewbox>
-                                    <Viewbox Grid.Row="1">
-                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                                      VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                                                  VerticalScrollBarVisibility="Auto">
                                             <ListBox x:Name="PoisonProp" ItemsSource="{Binding PoisonTypesProperties}"
                                                      Background="AliceBlue" VerticalAlignment="Stretch">
                                                 <ListBox.ItemContainerStyle>
@@ -1708,18 +1707,16 @@
                                                 </ListBox.ItemContainerStyle>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <materialDesign:Card Width="1400" Height="1000" Margin="10">
+                                                        <materialDesign:Card   Margin="10">
                                                             <materialDesign:Flipper
                                                                 Margin="5"
                                                                 materialDesign:ElevationAssist.Elevation="Dp0"
                                                                 Style="{StaticResource MaterialDesignCardFlipper}">
                                                                 <materialDesign:Flipper.FrontContent>
-                                                                    <Grid
-                                                                        Width="1400"
-                                                                        Height="700">
-                                                                        <Grid.RowDefinitions>
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
                                                                             <RowDefinition Height="*"/>
-                                                                            <RowDefinition Height="1.5*"/>
+                                                                            <RowDefinition Height="2*"/>
                                                                         </Grid.RowDefinitions>
                                                                         <Grid Grid.Row="0">
 
@@ -1746,51 +1743,52 @@
                                                                                 </Viewbox>
 
                                                                             </Grid>
-                                                                        </Grid>
-                                                                        <Grid Grid.Row="1" Width="1000">
-                                                                            <Viewbox Width="1000" HorizontalAlignment="Stretch">
-                                                                                <GroupBox Width="1000" Header="Описание"  HorizontalAlignment="Stretch">
-                                                                                    <TextBlock FontStretch="SemiExpanded" Text ="{Binding Description}">
-                                                                                    </TextBlock>
-                                                                                </GroupBox>
+                                                                            <Viewbox Grid.Column="1">
+                                                                                <StackPanel VerticalAlignment="Center"
+                                                                                    HorizontalAlignment="Right">
+                                                                                    <Button
+                                                                                        Margin="0,4,0,0"
+                                                                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                        Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                        <materialDesign:PackIcon
+                                                                                            Height="25"
+                                                                                            Width="25"
+                                                                                            Kind="Pencil" />
+                                                                                    </Button>
+                                                                                    <Button
+                                                                                        Margin="0,4,0,0"
+                                                                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                        Command="{Binding Path = DataContext.DeletePoison, Source={x:Reference Name=PoisonProp}}"
+                                                                                        CommandParameter="{Binding .}">
+
+                                                                                        <materialDesign:PackIcon
+                                                                                            Height="25"
+                                                                                            Width="25"
+                                                                                            Kind="CloseCircle" />
+                                                                                    </Button>
+
+                                                                                </StackPanel>
+
                                                                             </Viewbox>
                                                                         </Grid>
+                                                                        <Grid Grid.Row="1">
+                                                                            <StackPanel Margin="20">
+                                                                                <TextBlock Text="Описание:" FontSize="50"/>
 
-                                                                        <Viewbox Grid.Column="1">
-                                                                            <StackPanel VerticalAlignment="Center"
-                                                                                HorizontalAlignment="Right">
-                                                                                <Button
-                                                                                    Margin="0,4,0,0"
-                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
-                                                                                    <materialDesign:PackIcon
-                                                                                        Height="25"
-                                                                                        Width="25"
-                                                                                        Kind="Pencil" />
-                                                                                </Button>
-                                                                                <Button
-                                                                                    Margin="0,4,0,0"
-                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                    Command="{Binding Path = DataContext.DeletePoison, Source={x:Reference Name=PoisonProp}}"
-                                                                                    CommandParameter="{Binding .}">
-
-                                                                                    <materialDesign:PackIcon
-                                                                                        Height="25"
-                                                                                        Width="25"
-                                                                                        Kind="CloseCircle" />
-                                                                                </Button>
+                                                                                <TextBlock FontSize="50" TextWrapping="Wrap" Text="{Binding Description}"/>
 
                                                                             </StackPanel>
+                                                                          
+                                                                           
+                                                                        </Grid>
 
-                                                                        </Viewbox>
+                                                                       
 
 
                                                                     </Grid>
                                                                 </materialDesign:Flipper.FrontContent>
                                                                 <materialDesign:Flipper.BackContent>
-                                                                    <Grid
-                                                                        Width="1400"
-                                                                        Height="1000">
+                                                                    <Grid>
                                                                         <Grid.RowDefinitions>
                                                                             <RowDefinition
                                                                                 Height="*" />
@@ -1877,7 +1875,6 @@
                                             </ListBox>
 
                                         </ScrollViewer>
-                                    </Viewbox>
 
                                 </Grid>
                             </materialDesign:Card>
