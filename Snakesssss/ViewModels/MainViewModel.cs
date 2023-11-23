@@ -354,6 +354,20 @@ namespace Snakesssss.ViewModels
                 });
             }
         }
+
+        public ICommand AiLerningCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    var viewnodel = new AiLerningViewModel(SnakeForCreate);
+                    var window = new AiLerningWindow();
+                    window.DataContext = viewnodel;
+                    window.ShowDialog();
+                });
+            }
+        }
         public ICommand Search
         {
             get

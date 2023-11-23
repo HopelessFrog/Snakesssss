@@ -536,7 +536,7 @@
                         </Grid>
                     </materialDesign:Card>
                 </TabItem>
-                <TabItem IsEnabled="False" Visibility="Collapsed">
+                <TabItem IsEnabled="True" Visibility="Visible">
                     <TabItem.Header>
                         <StackPanel
                             Width="auto"
@@ -1047,12 +1047,12 @@
                                                             </StackPanel>
 
                                                         </Viewbox>
-                                                        <Viewbox Grid.Row="10" IsEnabled="False" Visibility="Collapsed">
+                                                        <Viewbox Grid.Row="10" >
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Margin="0,5,0,5" Text="Ai Folder" />
-                                                                <ToggleButton
-                                                                    Style="{StaticResource MaterialDesignActionLightToggleButton}"
-                                                                    ToolTip="MaterialDesignActionLightToggleButton"
+                                                                <Button
+                                                                    Command="{Binding AiLerningCommand}"
+                                                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                                                     Content="{materialDesign:PackIcon Kind=Creation}" />
                                                             </StackPanel>
                                                         </Viewbox>
