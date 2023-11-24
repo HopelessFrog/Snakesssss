@@ -10,7 +10,7 @@ using Snakesssss.Model;
 
 namespace Snakesssss.ViewModels
 {
-    public  class LoginViewModel : ICloseWindow
+    public  class LoginViewModel : ViewModelBase, ICloseWindow
     {
         public string Name { get; set; }
         public string Password { get; set; }
@@ -22,10 +22,16 @@ namespace Snakesssss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-
-                  
                     var user = DatabaseLocator.Context.Users.FirstOrDefault(u => u.Name == Name && u.Password == Password);
-                    if (user != null)
+                    if (DatabaseLocator.Context.Users.Count() == 0)
+                    {
+                        var viewModel = new MainViewModel(new User() { CanPermission = true, CanEdit = true});
+                        var window = new MainWindow(viewModel);
+                        window.DataContext = viewModel;
+                        window.Show();
+                        Close();
+                    }
+                    else if (user != null)
                     {
                         var viewModel = new MainViewModel(user);
                         var window = new MainWindow(viewModel);

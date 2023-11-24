@@ -551,211 +551,215 @@
                                 Text="PicSearch" />
                         </StackPanel>
                     </TabItem.Header>
-                    <materialDesign:Card Margin="4">
-                        <Grid>
-                            <materialDesign:Card Padding="8" Margin="5" Visibility="{Binding SnakeRdy}">
-                                <materialDesign:Flipper
-                                    materialDesign:ElevationAssist.Elevation="Dp0"
-                                    Style="{StaticResource MaterialDesignCardFlipper}">
-                                    <materialDesign:Flipper.FrontContent>
-                                        <Grid
-                                            Width="200"
-                                            Height="306">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition
-                                                    Height="160" />
-                                                <RowDefinition
-                                                    Height="*" />
-                                            </Grid.RowDefinitions>
-                                            <materialDesign:ColorZone
-                                                VerticalAlignment="Stretch"
-                                                Mode="PrimaryLight">
-                                                <Image Source="{Binding AiSnake.ImagePath}" Width="160"
-                                                       Height="160" />
-                                            </materialDesign:ColorZone>
-                                            <StackPanel
-                                                Grid.Row="1"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center">
-                                                <StackPanel Orientation="Horizontal" Margin="2">
-                                                    <TextBox
-                                                        Text="{Binding AiSnake.Name}" FontWeight="Bold"
-                                                        FontStretch="Normal" />
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="2">
-                                                    <TextBox
-                                                        materialDesign:HintAssist.Hint="Family"
-                                                        materialDesign:HintAssist.IsFloating="True"
-                                                        Text="{Binding AiSnake.Family.Name}" />
-                                                </StackPanel>
+                    <Viewbox>
+                        <materialDesign:Card Margin="4">
+                            <Grid>
 
-                                                <Button
-                                                    Margin="0,4,0,0"
-                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                    Content="INFO"
-                                                    Style="{StaticResource MaterialDesignFlatButton}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </materialDesign:Flipper.FrontContent>
-                                    <materialDesign:Flipper.BackContent>
-                                        <Grid
-                                            MinWidth="200"
-                                            MinHeight="256">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition
-                                                    Height="Auto" />
-                                                <RowDefinition
-                                                    Height="*" />
-                                            </Grid.RowDefinitions>
-                                            <materialDesign:ColorZone
-                                                Padding="6"
-                                                Mode="SecondaryMid">
-                                                <StackPanel
-                                                    Orientation="Horizontal">
-                                                    <Button
-                                                        HorizontalAlignment="Left"
-                                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                        Style="{StaticResource MaterialDesignToolForegroundButton}">
-                                                        <materialDesign:PackIcon
-                                                            HorizontalAlignment="Right"
-                                                            Kind="ArrowLeft" />
-                                                    </Button>
-                                                    <TextBlock
-                                                        Margin="8,0,0,0"
-                                                        VerticalAlignment="Center"
-                                                        Text="{Binding AiSnake.Name}" />
-                                                </StackPanel>
-                                            </materialDesign:ColorZone>
+
+                                <materialDesign:Card Padding="8" Margin="5" Visibility="{Binding SnakeRdy}">
+                                    <materialDesign:Flipper
+                                        materialDesign:ElevationAssist.Elevation="Dp0"
+                                        Style="{StaticResource MaterialDesignCardFlipper}">
+                                        <materialDesign:Flipper.FrontContent>
                                             <Grid
-                                                Grid.Row="1"
-                                                Width="172"
-                                                Margin="0,6,0,0"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Top">
+                                                Width="200"
+                                                Height="306">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
-                                                    <RowDefinition />
+                                                    <RowDefinition
+                                                        Height="160" />
+                                                    <RowDefinition
+                                                        Height="*" />
                                                 </Grid.RowDefinitions>
-                                                <TextBox
-                                                    IsReadOnly="True"
-                                                    Margin="0,12,0,0"
-                                                    materialDesign:HintAssist.Hint="Poison type"
-                                                    materialDesign:HintAssist.IsFloating="True"
-                                                    Text="{Binding AiSnake.PoisonType.Name}" />
-                                                <TextBox IsReadOnly="True"
-                                                         Grid.Row="1"
-                                                         Margin="0,12,0,0"
-                                                         materialDesign:HintAssist.Hint="Design"
-                                                         materialDesign:HintAssist.IsFloating="True"
-                                                         Text="{Binding AiSnake.Design.Name}" />
+                                                <materialDesign:ColorZone
+                                                    VerticalAlignment="Stretch"
+                                                    Mode="PrimaryLight">
+                                                    <Image Source="{Binding AiSnake.ImagePath}" Width="160"
+                                                           Height="160" />
+                                                </materialDesign:ColorZone>
+                                                <StackPanel
+                                                    Grid.Row="1"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center">
+                                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                                        <TextBox
+                                                            Text="{Binding AiSnake.Name}" FontWeight="Bold"
+                                                            FontStretch="Normal" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                                        <TextBox
+                                                            materialDesign:HintAssist.Hint="Family"
+                                                            materialDesign:HintAssist.IsFloating="True"
+                                                            Text="{Binding AiSnake.Family.Name}" />
+                                                    </StackPanel>
 
-                                                <GroupBox Grid.Row="2"
-                                                          Margin="0,12,0,0"
-                                                          materialDesign:ColorZoneAssist.Mode="SecondaryMid"
-                                                          Header="Amount of Posion"
-                                                          Style="{StaticResource MaterialDesignGroupBox}">
-                                                    <TextBlock
-                                                        materialDesign:HintAssist.Hint="Amount of Poison"
-                                                        materialDesign:HintAssist.IsFloating="True"
-                                                        Margin="0,12,0,0">
-                                                        <Run Text="{Binding AiSnake.MinAmountOfPoison}" />
-                                                        <Run Text="/" />
-                                                        <Run Text="{Binding AiSnake.MaxAmountOfPoison}" />
-                                                        <Run Text=" mg" />
-                                                    </TextBlock>
-
-                                                </GroupBox>
-                                                <GroupBox Grid.Row="3"
-                                                          Margin="0,12,0,0"
-                                                          materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-                                                          Header="Lenght"
-                                                          Style="{StaticResource MaterialDesignGroupBox}">
-                                                    <TextBlock
-                                                        materialDesign:HintAssist.Hint="Amount of Poison"
-                                                        materialDesign:HintAssist.IsFloating="True"
-                                                        Margin="0,12,0,0">
-                                                        <Run Text="{Binding AiSnake.MinLenght}" />
-                                                        <Run Text="/" />
-                                                        <Run Text="{Binding AiSnake.MaxLenght}" />
-                                                        <Run Text=" sm" />
-                                                    </TextBlock>
-
-                                                </GroupBox>
-                                                <Expander
-                                                    Grid.Row="4"
-                                                    Margin="0,12,0,0"
-                                                    HorizontalAlignment="Stretch"
-                                                    Header="Areas">
-                                                    <ListBox ItemsSource="{Binding AiSnake.Areas}"
-                                                             IsManipulationEnabled="False">
-                                                        <ListBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBox IsReadOnly="True"
-                                                                             Text="{Binding Name}" />
-                                                                    <materialDesign:PackIcon
-                                                                        Kind="MapMarker" />
-                                                                </StackPanel>
-
-                                                            </DataTemplate>
-                                                        </ListBox.ItemTemplate>
-                                                    </ListBox>
-                                                </Expander>
-                                                <Expander
-                                                    Grid.Row="5"
-                                                    Margin="0,12,0,0"
-                                                    HorizontalAlignment="Stretch"
-                                                    Header="Colors">
-                                                    <ListBox ItemsSource="{Binding AiSnake.Colors}"
-                                                             Style="{StaticResource MaterialDesignGridList}"
-                                                             IsManipulationEnabled="False">
-                                                        <ListBox.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Ellipse Width="20" Height="20"
-                                                                         Fill="{Binding Color}" Margin="5" />
-                                                            </DataTemplate>
-                                                        </ListBox.ItemTemplate>
-                                                    </ListBox>
-                                                </Expander>
-                                                <StackPanel Grid.Row="6" Orientation="Vertical"
-                                                            HorizontalAlignment="Center">
-                                                    <TextBlock>Dangerous Score</TextBlock>
-                                                    <materialDesign:RatingBar
-                                                        IsPreviewValueEnabled="True"
-                                                        Max="5"
-                                                        Min="0"
-                                                        ValueIncrements="0.25"
-                                                        Value="{Binding AiSnake.DangerausScore}"
-                                                        PreviewMouseDown="UIElement_OnPreviewMouseDown" />
-
+                                                    <Button
+                                                        Margin="0,4,0,0"
+                                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                        Content="INFO"
+                                                        Style="{StaticResource MaterialDesignFlatButton}" />
                                                 </StackPanel>
-
                                             </Grid>
-                                        </Grid>
-                                    </materialDesign:Flipper.BackContent>
-                                </materialDesign:Flipper>
-                            </materialDesign:Card>
+                                        </materialDesign:Flipper.FrontContent>
+                                        <materialDesign:Flipper.BackContent>
+                                            <Grid
+                                                MinWidth="200"
+                                                MinHeight="256">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition
+                                                        Height="Auto" />
+                                                    <RowDefinition
+                                                        Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <materialDesign:ColorZone
+                                                    Padding="6"
+                                                    Mode="SecondaryMid">
+                                                    <StackPanel
+                                                        Orientation="Horizontal">
+                                                        <Button
+                                                            HorizontalAlignment="Left"
+                                                            Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                            Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                            <materialDesign:PackIcon
+                                                                HorizontalAlignment="Right"
+                                                                Kind="ArrowLeft" />
+                                                        </Button>
+                                                        <TextBlock
+                                                            Margin="8,0,0,0"
+                                                            VerticalAlignment="Center"
+                                                            Text="{Binding AiSnake.Name}" />
+                                                    </StackPanel>
+                                                </materialDesign:ColorZone>
+                                                <Grid
+                                                    Grid.Row="1"
+                                                    Width="172"
+                                                    Margin="0,6,0,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Top">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <TextBox
+                                                        IsReadOnly="True"
+                                                        Margin="0,12,0,0"
+                                                        materialDesign:HintAssist.Hint="Poison type"
+                                                        materialDesign:HintAssist.IsFloating="True"
+                                                        Text="{Binding AiSnake.PoisonType.Name}" />
+                                                    <TextBox IsReadOnly="True"
+                                                             Grid.Row="1"
+                                                             Margin="0,12,0,0"
+                                                             materialDesign:HintAssist.Hint="Design"
+                                                             materialDesign:HintAssist.IsFloating="True"
+                                                             Text="{Binding AiSnake.Design.Name}" />
 
-                            <Button Margin="10"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-                                    ToolTip="MaterialDesignFloatingActionLightButton"
-                                    Command="{Binding FindSnake}">
+                                                    <GroupBox Grid.Row="2"
+                                                              Margin="0,12,0,0"
+                                                              materialDesign:ColorZoneAssist.Mode="SecondaryMid"
+                                                              Header="Amount of Posion"
+                                                              Style="{StaticResource MaterialDesignGroupBox}">
+                                                        <TextBlock
+                                                            materialDesign:HintAssist.Hint="Amount of Poison"
+                                                            materialDesign:HintAssist.IsFloating="True"
+                                                            Margin="0,12,0,0">
+                                                            <Run Text="{Binding AiSnake.MinAmountOfPoison}" />
+                                                            <Run Text="/" />
+                                                            <Run Text="{Binding AiSnake.MaxAmountOfPoison}" />
+                                                            <Run Text=" mg" />
+                                                        </TextBlock>
 
-                                <materialDesign:PackIcon
-                                    Width="40"
-                                    Height="40"
-                                    Kind="Search" />
-                            </Button>
-                        </Grid>
-                    </materialDesign:Card>
+                                                    </GroupBox>
+                                                    <GroupBox Grid.Row="3"
+                                                              Margin="0,12,0,0"
+                                                              materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+                                                              Header="Lenght"
+                                                              Style="{StaticResource MaterialDesignGroupBox}">
+                                                        <TextBlock
+                                                            materialDesign:HintAssist.Hint="Amount of Poison"
+                                                            materialDesign:HintAssist.IsFloating="True"
+                                                            Margin="0,12,0,0">
+                                                            <Run Text="{Binding AiSnake.MinLenght}" />
+                                                            <Run Text="/" />
+                                                            <Run Text="{Binding AiSnake.MaxLenght}" />
+                                                            <Run Text=" sm" />
+                                                        </TextBlock>
+
+                                                    </GroupBox>
+                                                    <Expander
+                                                        Grid.Row="4"
+                                                        Margin="0,12,0,0"
+                                                        HorizontalAlignment="Stretch"
+                                                        Header="Areas">
+                                                        <ListBox ItemsSource="{Binding AiSnake.Areas}"
+                                                                 IsManipulationEnabled="False">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBox IsReadOnly="True"
+                                                                            Text="{Binding Name}" />
+                                                                        <materialDesign:PackIcon
+                                                                            Kind="MapMarker" />
+                                                                    </StackPanel>
+
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListBox>
+                                                    </Expander>
+                                                    <Expander
+                                                        Grid.Row="5"
+                                                        Margin="0,12,0,0"
+                                                        HorizontalAlignment="Stretch"
+                                                        Header="Colors">
+                                                        <ListBox ItemsSource="{Binding AiSnake.Colors}"
+                                                                 Style="{StaticResource MaterialDesignGridList}"
+                                                                 IsManipulationEnabled="False">
+                                                            <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Ellipse Width="20" Height="20"
+                                                                             Fill="{Binding Color}" Margin="5" />
+                                                                </DataTemplate>
+                                                            </ListBox.ItemTemplate>
+                                                        </ListBox>
+                                                    </Expander>
+                                                    <StackPanel Grid.Row="6" Orientation="Vertical"
+                                                                HorizontalAlignment="Center">
+                                                        <TextBlock>Dangerous Score</TextBlock>
+                                                        <materialDesign:RatingBar
+                                                            IsPreviewValueEnabled="True"
+                                                            Max="5"
+                                                            Min="0"
+                                                            ValueIncrements="0.25"
+                                                            Value="{Binding AiSnake.DangerausScore}"
+                                                            PreviewMouseDown="UIElement_OnPreviewMouseDown" />
+
+                                                    </StackPanel>
+
+                                                </Grid>
+                                            </Grid>
+                                        </materialDesign:Flipper.BackContent>
+                                    </materialDesign:Flipper>
+                                </materialDesign:Card>
+
+                                <Button Margin="10"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                                        ToolTip="MaterialDesignFloatingActionLightButton"
+                                        Command="{Binding FindSnake}">
+
+                                    <materialDesign:PackIcon
+                                        Width="40"
+                                        Height="40"
+                                        Kind="Search" />
+                                </Button>
+                            </Grid>
+                        </materialDesign:Card>
+                    </Viewbox>
                 </TabItem>
                 <TabItem IsEnabled="{Binding User.CanEdit}">
                     <TabItem.Header>
@@ -1047,7 +1051,7 @@
                                                             </StackPanel>
 
                                                         </Viewbox>
-                                                        <Viewbox Grid.Row="10" >
+                                                        <Viewbox Grid.Row="10">
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Margin="0,5,0,5" Text="Ai Folder" />
                                                                 <Button
@@ -1698,183 +1702,183 @@
                                     </Viewbox>
                                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
                                                   VerticalScrollBarVisibility="Auto">
-                                            <ListBox x:Name="PoisonProp" ItemsSource="{Binding PoisonTypesProperties}"
-                                                     Background="AliceBlue" VerticalAlignment="Stretch">
-                                                <ListBox.ItemContainerStyle>
-                                                    <Style TargetType="{x:Type ListBoxItem}">
-                                                        <Setter Property="Focusable" Value="False" />
-                                                    </Style>
-                                                </ListBox.ItemContainerStyle>
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <materialDesign:Card   Margin="10">
-                                                            <materialDesign:Flipper
-                                                                Margin="5"
-                                                                materialDesign:ElevationAssist.Elevation="Dp0"
-                                                                Style="{StaticResource MaterialDesignCardFlipper}">
-                                                                <materialDesign:Flipper.FrontContent>
+                                        <ListBox x:Name="PoisonProp" ItemsSource="{Binding PoisonTypesProperties}"
+                                                 Background="AliceBlue" VerticalAlignment="Stretch">
+                                            <ListBox.ItemContainerStyle>
+                                                <Style TargetType="{x:Type ListBoxItem}">
+                                                    <Setter Property="Focusable" Value="False" />
+                                                </Style>
+                                            </ListBox.ItemContainerStyle>
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <materialDesign:Card Margin="10">
+                                                        <materialDesign:Flipper
+                                                            Margin="5"
+                                                            materialDesign:ElevationAssist.Elevation="Dp0"
+                                                            Style="{StaticResource MaterialDesignCardFlipper}">
+                                                            <materialDesign:Flipper.FrontContent>
                                                                 <Grid>
                                                                     <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="*"/>
-                                                                            <RowDefinition Height="2*"/>
-                                                                        </Grid.RowDefinitions>
-                                                                        <Grid Grid.Row="0">
+                                                                        <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="2*" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid Grid.Row="0">
 
 
-                                                                            <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="3*" />
-                                                                                <ColumnDefinition Width="*" />
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="3*" />
+                                                                            <ColumnDefinition Width="*" />
 
-                                                                            </Grid.ColumnDefinitions>
-                                                                            <Grid Grid.Column="0">
-                                                                                <Grid.RowDefinitions>
-                                                                                    <RowDefinition Height="2*" />
-                                                                                    <RowDefinition Height="*" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Grid Grid.Column="0">
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="2*" />
+                                                                                <RowDefinition Height="*" />
 
-                                                                                </Grid.RowDefinitions>
-                                                                                <Viewbox Grid.Row="0"
-                                                                                    HorizontalAlignment="Left"
-                                                                                    Margin="3">
-                                                                                        <TextBlock
-                                                                                            Margin="15,3,10,3"
-                                                                                            Text="{Binding Name}"
-                                                                                            VerticalAlignment="Stretch"
-                                                                                            FontSize="20" />
-                                                                                </Viewbox>
-
-                                                                            </Grid>
-                                                                            <Viewbox Grid.Column="1">
-                                                                                <StackPanel VerticalAlignment="Center"
-                                                                                    HorizontalAlignment="Right">
-                                                                                    <Button
-                                                                                        Margin="0,4,0,0"
-                                                                                        Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                                                        Style="{StaticResource MaterialDesignFlatButton}">
-                                                                                        <materialDesign:PackIcon
-                                                                                            Height="25"
-                                                                                            Width="25"
-                                                                                            Kind="Pencil" />
-                                                                                    </Button>
-                                                                                    <Button
-                                                                                        Margin="0,4,0,0"
-                                                                                        Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                        Command="{Binding Path = DataContext.DeletePoison, Source={x:Reference Name=PoisonProp}}"
-                                                                                        CommandParameter="{Binding .}">
-
-                                                                                        <materialDesign:PackIcon
-                                                                                            Height="25"
-                                                                                            Width="25"
-                                                                                            Kind="CloseCircle" />
-                                                                                    </Button>
-
-                                                                                </StackPanel>
-
+                                                                            </Grid.RowDefinitions>
+                                                                            <Viewbox Grid.Row="0"
+                                                                                HorizontalAlignment="Left"
+                                                                                Margin="3">
+                                                                                <TextBlock
+                                                                                    Margin="15,3,10,3"
+                                                                                    Text="{Binding Name}"
+                                                                                    VerticalAlignment="Stretch"
+                                                                                    FontSize="20" />
                                                                             </Viewbox>
-                                                                        </Grid>
-                                                                        <Grid Grid.Row="1">
-                                                                            <StackPanel Margin="20">
-                                                                                <TextBlock Text="Описание:" FontSize="50"/>
 
-                                                                                <TextBlock FontSize="50" TextWrapping="Wrap" Text="{Binding Description}"/>
+                                                                        </Grid>
+                                                                        <Viewbox Grid.Column="1">
+                                                                            <StackPanel VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Right">
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="Pencil" />
+                                                                                </Button>
+                                                                                <Button
+                                                                                    Margin="0,4,0,0"
+                                                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                                                    Command="{Binding Path = DataContext.DeletePoison, Source={x:Reference Name=PoisonProp}}"
+                                                                                    CommandParameter="{Binding .}">
+
+                                                                                    <materialDesign:PackIcon
+                                                                                        Height="25"
+                                                                                        Width="25"
+                                                                                        Kind="CloseCircle" />
+                                                                                </Button>
 
                                                                             </StackPanel>
-                                                                          
-                                                                           
-                                                                        </Grid>
 
-                                                                       
+                                                                        </Viewbox>
+                                                                    </Grid>
+                                                                    <Grid Grid.Row="1">
+                                                                        <StackPanel Margin="20">
+                                                                            <TextBlock Text="Описание:" FontSize="50" />
+
+                                                                            <TextBlock FontSize="50"
+                                                                                TextWrapping="Wrap"
+                                                                                Text="{Binding Description}" />
+
+                                                                        </StackPanel>
 
 
                                                                     </Grid>
-                                                                </materialDesign:Flipper.FrontContent>
-                                                                <materialDesign:Flipper.BackContent>
-                                                                    <Grid>
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition
-                                                                                Height="*" />
-                                                                            <RowDefinition
-                                                                                Height="2*" />
-                                                                        </Grid.RowDefinitions>
-                                                                        <materialDesign:ColorZone
-                                                                            Padding="6"
-                                                                            Mode="SecondaryMid"
-                                                                            VerticalAlignment="Stretch">
-                                                                            <StackPanel
-                                                                                Orientation="Horizontal">
-                                                                                <Button
-                                                                                    Margin="30,0,0,0"
+
+
+                                                                </Grid>
+                                                            </materialDesign:Flipper.FrontContent>
+                                                            <materialDesign:Flipper.BackContent>
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition
+                                                                            Height="*" />
+                                                                        <RowDefinition
+                                                                            Height="2*" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <materialDesign:ColorZone
+                                                                        Padding="6"
+                                                                        Mode="SecondaryMid"
+                                                                        VerticalAlignment="Stretch">
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal">
+                                                                            <Button
+                                                                                Margin="30,0,0,0"
+                                                                                Width="50"
+                                                                                Height="50"
+                                                                                HorizontalAlignment="Left"
+                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                                                Style="{StaticResource MaterialDesignToolForegroundButton}">
+                                                                                <materialDesign:PackIcon
                                                                                     Width="50"
                                                                                     Height="50"
-                                                                                    HorizontalAlignment="Left"
-                                                                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                                                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
-                                                                                    <materialDesign:PackIcon
-                                                                                        Width="50"
-                                                                                        Height="50"
-                                                                                        HorizontalAlignment="Right"
-                                                                                        Kind="ArrowLeft" />
-                                                                                </Button>
-                                                                                <TextBlock
-                                                                                    FontSize="50"
-                                                                                    Margin="8,0,0,0"
-                                                                                    VerticalAlignment="Center"
-                                                                                    Text="" />
-                                                                            </StackPanel>
-                                                                        </materialDesign:ColorZone>
-                                                                        <Grid
-                                                                            Grid.Row="1"
-                                                                            Width="1400"
-                                                                            Margin="0,6,0,0"
-                                                                            HorizontalAlignment="Stretch"
-                                                                            VerticalAlignment="Center">
-                                                                            <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="2*" />
-                                                                                <ColumnDefinition Width="*" />
+                                                                                    HorizontalAlignment="Right"
+                                                                                    Kind="ArrowLeft" />
+                                                                            </Button>
+                                                                            <TextBlock
+                                                                                FontSize="50"
+                                                                                Margin="8,0,0,0"
+                                                                                VerticalAlignment="Center"
+                                                                                Text="" />
+                                                                        </StackPanel>
+                                                                    </materialDesign:ColorZone>
+                                                                    <Grid
+                                                                        Grid.Row="1"
+                                                                        Width="1400"
+                                                                        Margin="0,6,0,0"
+                                                                        HorizontalAlignment="Stretch"
+                                                                        VerticalAlignment="Center">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="2*" />
+                                                                            <ColumnDefinition Width="*" />
 
-                                                                            </Grid.ColumnDefinitions>
-                                                                            <Viewbox Grid.Column="0" Margin="3,3,10,3"
-                                                                                HorizontalAlignment="Left">
-                                                                                <TextBox
-                                                                                    Width="300"
-                                                                                    Margin="15,3,10,3"
-                                                                                    FontSize="20"
-                                                                                    materialDesign:HintAssist.Hint="Название"
-                                                                                    materialDesign:HintAssist.IsFloating="True"
-                                                                                    Text="{Binding Name}" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Viewbox Grid.Column="0" Margin="3,3,10,3"
+                                                                            HorizontalAlignment="Left">
+                                                                            <TextBox
+                                                                                Width="300"
+                                                                                Margin="15,3,10,3"
+                                                                                FontSize="20"
+                                                                                materialDesign:HintAssist.Hint="Название"
+                                                                                materialDesign:HintAssist.IsFloating="True"
+                                                                                Text="{Binding Name}" />
 
-                                                                            </Viewbox>
-                                                                            <Viewbox Grid.Column="1" Margin="5"
-                                                                                HorizontalAlignment="Right"
-                                                                                VerticalAlignment="Stretch">
-                                                                                <Button
-                                                                                    VerticalAlignment="Stretch"
-                                                                                    Margin="5"
-                                                                                    FontSize="15"
-                                                                                    Content="Change"
-                                                                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                                                                    ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                                                    <i:Interaction.Triggers>
-                                                                                        <i:EventTrigger
-                                                                                            EventName="Click">
-                                                                                            <i:InvokeCommandAction
-                                                                                                Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=PoisonProp}}" />
-                                                                                            <i:InvokeCommandAction
-                                                                                                Command="{x:Static materialDesign:Flipper.FlipCommand}" />
-                                                                                        </i:EventTrigger>
-                                                                                    </i:Interaction.Triggers>
-                                                                                </Button>
-                                                                            </Viewbox>
+                                                                        </Viewbox>
+                                                                        <Viewbox Grid.Column="1" Margin="5"
+                                                                            HorizontalAlignment="Right"
+                                                                            VerticalAlignment="Stretch">
+                                                                            <Button
+                                                                                VerticalAlignment="Stretch"
+                                                                                Margin="5"
+                                                                                FontSize="15"
+                                                                                Content="Change"
+                                                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                                                ToolTip="Resource name: MaterialDesignRaisedButton">
+                                                                                <i:Interaction.Triggers>
+                                                                                    <i:EventTrigger
+                                                                                        EventName="Click">
+                                                                                        <i:InvokeCommandAction
+                                                                                            Command="{Binding Path = DataContext.SaveDataComand, Source={x:Reference Name=PoisonProp}}" />
+                                                                                        <i:InvokeCommandAction
+                                                                                            Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                                                                                    </i:EventTrigger>
+                                                                                </i:Interaction.Triggers>
+                                                                            </Button>
+                                                                        </Viewbox>
 
-                                                                        </Grid>
                                                                     </Grid>
-                                                                </materialDesign:Flipper.BackContent>
-                                                            </materialDesign:Flipper>
-                                                        </materialDesign:Card>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
+                                                                </Grid>
+                                                            </materialDesign:Flipper.BackContent>
+                                                        </materialDesign:Flipper>
+                                                    </materialDesign:Card>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
 
-                                        </ScrollViewer>
+                                    </ScrollViewer>
 
                                 </Grid>
                             </materialDesign:Card>

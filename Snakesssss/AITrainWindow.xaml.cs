@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snakesssss.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,19 @@ namespace Snakesssss
         public AITrainWindow()
         {
             InitializeComponent();
+            Loaded += AITrainWindow_Loaded;
         }
+
+        private void AITrainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ICloseWindow viewModel)
+            {
+                viewModel.Close +=
+                    () => { this.Close(); };
+
+                Closing += (s, e) => { e.Cancel = !viewModel.CanClose(); };
+            }
+        }
+       
     }
 }

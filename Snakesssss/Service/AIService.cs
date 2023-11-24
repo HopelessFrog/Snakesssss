@@ -5,21 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ookii.Dialogs.Wpf;
+using Microsoft.ML;
+using Snakesssss.Model;
 
-namespace MLModelSnakes_ConsoleApp1.Service
+namespace Snakesssss.Service
 {
     public static  class AIService
     {
-        public  const string AiFolder = "AiFolder";
-        public static void LearnSnake()
+        private static MLContext mlContext;
+        public  const string AiFolder = @"Samples\";
+        public static async Task LearnSnake(string data, string name)
         {
-            Ookii.Dialogs.Wpf.VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog();
-            var result =  dialog.ShowDialog();
-            if (result != null)
+            mlContext = new MLContext();
+
+            if (data != "")
             {
-                CopyDirectory(dialog.SelectedPath, AiFolder,true);
+                await Task.Run(() => CopyDirectory(data, AiFolder + name, true));
             }
 
+            var rdydata = await Task.Run(() => MLModelSnakes.LoadImageFromFolder(mlContext, AiFolder));
+            var qwe = rdydata.GetRowCount();
+            await Task.Run(() => MLModelSnakes.RetrainModel(mlContext, rdydata));
         }
 
         static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)

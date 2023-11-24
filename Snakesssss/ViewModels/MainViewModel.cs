@@ -170,7 +170,8 @@ namespace Snakesssss.ViewModels
             {
                 SnakeForCreate.AiFolderPath = "qweqwe";
                 if (string.IsNullOrEmpty(SnakeForCreate.Name) || SnakeForCreate.Family == null ||
-                    SnakeForCreate.Colors.Count == 0 || SnakeForCreate.Areas.Count == 0 ||
+                    SnakeForCreate.Colors == null ||
+                    SnakeForCreate.Colors.Count == 0 || SnakeForCreate.Areas == null || SnakeForCreate.Areas.Count == 0 ||
                     SnakeForCreate.PoisonType == null || SnakeForCreate.Design == null ||
                     SnakeForCreate.DangerausScore == null || string.IsNullOrEmpty(SnakeForCreate.AiFolderPath))
                 {
@@ -363,8 +364,8 @@ namespace Snakesssss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    var viewnodel = new AiLerningViewModel(SnakeForCreate);
-                    var window = new AiLerningWindow();
+                    var viewnodel = new AiTrainViewModel(SnakeForCreate);
+                    var window = new AITrainWindow();
                     window.DataContext = viewnodel;
                     window.ShowDialog();
                 });
@@ -398,7 +399,7 @@ namespace Snakesssss.ViewModels
                         conditionsSnakes.Add(s => s.Areas.Any(c => SnakeForSearch.Areas.Contains(c)));
                     if (SnakeForSearch.Colors!= null &&   SnakeForSearch.Colors.Count != 0)
                         conditionsSnakes.Add(s => s.Colors.Any(c => SnakeForSearch.Colors.Contains(c)));
-                    if (SnakeForSearch.PoisonType != null && SnakeForSearch.PoisonType.Name != "none" )
+                    if (SnakeForSearch.PoisonType != null && SnakeForSearch.PoisonType.Name != "none")
                     {
                         if(SnakeForSearch.MaxAmountOfPoison!= 0)
                             conditionsSnakes.Add(s => s.MaxAmountOfPoison <= SnakeForSearch.MaxAmountOfPoison);

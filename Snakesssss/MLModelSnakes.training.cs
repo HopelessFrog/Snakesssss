@@ -20,7 +20,7 @@ namespace Snakesssss
         /// </summary>
         /// <param name="mlContext">The common context for all ML.NET operations.</param>
         /// <param name="folder"> Folder to the image data for training.</param>
-        public static IDataView LoadImageFromFolder(MLContext mlContext, string folder, string name)
+        public static IDataView LoadImageFromFolder(MLContext mlContext, string folder)
         {
             var res = new List<ModelInput>();
             var allowedImageExtensions = new[] { ".png", ".jpg", ".jpeg", ".gif" };
@@ -39,7 +39,7 @@ namespace Snakesssss
                 {
                     res.AddRange(imageList.Select(i => new ModelInput 
                     {
-                        Label = name,
+                        Label = directory.Name,
                          ImageSource = File.ReadAllBytes(i.FullName),
                     }));
                 }

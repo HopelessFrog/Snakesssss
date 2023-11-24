@@ -12,12 +12,13 @@ namespace Snakesssss.Model
         public SnakeContext()
             :base()
         {
+           
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source= C:\poe\snakes.db");
+            optionsBuilder.UseSqlite(@"Data Source= snakes.db");
         }
         
         public DbSet<Snake> Snakes { get; set; }
