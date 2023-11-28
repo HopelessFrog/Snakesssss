@@ -364,13 +364,30 @@ namespace Snakesssss.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    var viewnodel = new AiTrainViewModel(SnakeForCreate);
-                    var window = new AITrainWindow();
-                    window.DataContext = viewnodel;
-                    window.ShowDialog();
+                    if (SnakeForCreate.Name != null && SnakeForCreate.Name != "")
+                    {
+                        var viewnodel = new AiTrainViewModel(SnakeForCreate);
+                        IAiViewModel temp = viewnodel;
+                        temp.Lern += Temp_Lern;
+                        var window = new AITrainWindow();
+                        window.DataContext = viewnodel;
+                        window.ShowDialog();
+                    }
+                    else
+                    {
+                        Xceed.Wpf.Toolkit.MessageBox.Show("Сначало заполните имя", "",
+                            MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    }
                 });
             }
         }
+
+        public bool  NameIsReadOnly { get; set; }
+        private void Temp_Lern(object? sender, EventArgs e)
+        {
+            NameIsReadOnly = true;
+        }
+
         public ICommand Search
         {
             get
@@ -444,6 +461,7 @@ namespace Snakesssss.ViewModels
                 SnakeForCreate = new Snake();
                 SnakeForCreate.ImagePath = defaultImage;
                 SetDefaultValue?.Invoke(this, EventArgs.Empty);
+                NameIsReadOnly = false;
 
             }); }
         }
@@ -520,11 +538,12 @@ namespace Snakesssss.ViewModels
         public Snake AiSnake { get; set; }
         public string Result { get; set; }
         public Visibility SnakeRdy { get; set; } 
+        public Visibility Loading { get; set; }
         public ICommand FindSnake
         {
             get
             {
-                return new DelegateCommand(() =>
+                return new DelegateCommand(async () =>
                 {
 
                     Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
@@ -535,11 +554,12 @@ namespace Snakesssss.ViewModels
                         {
                             ImageSource = File.ReadAllBytes(openFileDialog.FileName)
                         };
-                        Result =  MLModelSnakes.Predict(sampleData).PredictedLabel;
-                        var qwe = DatabaseLocator.Context.Snakes.ToList();
-                        AiSnake = qwe.Find(s => s.Name.Contains(Result));
-                    //    AiSnake =   DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
+                        Loading = Visibility.Visible;
+                        await Predict(sampleData);
+                        Loading = Visibility.Collapsed;
                         SnakeRdy = Visibility.Visible;
+
+
                     }
                     else
                     {
@@ -549,6 +569,15 @@ namespace Snakesssss.ViewModels
 
                 });
             }
+        }
+
+        private async Task Predict(MLModelSnakes.ModelInput sampleData)
+        {
+            await Task.Run(() => Result = MLModelSnakes.Predict(sampleData).PredictedLabel) ;
+            var qwe = DatabaseLocator.Context.Snakes.ToList();
+            AiSnake = qwe.Find(s => s.Name.Contains(Result));
+            //    AiSnake =   DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
+           
         }
         public ICommand DeleteSnake
         {
@@ -620,7 +649,8 @@ namespace Snakesssss.ViewModels
             SelectedPoisonType = false;
             Snakes = new ObservableCollection<Snake>();
             SnakeForSearch = new Snake();
-           
+            Loading = Visibility.Collapsed;
+
 
             //Snakes.Add(new Snake()
             //{

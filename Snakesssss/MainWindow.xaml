@@ -554,8 +554,11 @@
                     <Viewbox>
                         <materialDesign:Card Margin="4">
                             <Grid>
-
-
+                                <ProgressBar
+                                    Visibility="{Binding Loading}"
+                                    IsIndeterminate="True"
+                                    Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                    Value="50" />
                                 <materialDesign:Card Padding="8" Margin="5" Visibility="{Binding SnakeRdy}">
                                     <materialDesign:Flipper
                                         materialDesign:ElevationAssist.Elevation="Dp0"
@@ -927,6 +930,7 @@
                                                         </Viewbox>
                                                         <Viewbox Grid.Row="1" Margin="5,0,5,0">
                                                             <TextBox
+                                                                IsReadOnly="{Binding NameIsReadOnly}"
                                                                 Width="100"
                                                                 Margin="0"
                                                                 Padding="2"

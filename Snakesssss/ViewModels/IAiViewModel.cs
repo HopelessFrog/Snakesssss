@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Snakesssss.ViewModels
 {
    public interface IAiViewModel : ICloseWindow
-    {
-    }
+   {
+       event EventHandler Lern;
+   }
 }

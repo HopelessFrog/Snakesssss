@@ -12,7 +12,6 @@ namespace Snakesssss.Model
         public SnakeContext()
             :base()
         {
-           
             Database.EnsureCreated();
         }
 

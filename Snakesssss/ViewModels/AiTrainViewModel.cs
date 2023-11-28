@@ -76,6 +76,7 @@ namespace Snakesssss.ViewModels
                         return; 
                     buzy = true;
                     Loaning = Visibility.Visible;
+                    Lern?.Invoke(this, EventArgs.Empty);
                      await AIService.LearnSnake(selectedFolderPath,Snake.Name);
                      Loaning = Visibility.Collapsed;
 
@@ -95,5 +96,7 @@ namespace Snakesssss.ViewModels
                 return true;
             }
         }
+
+        public event EventHandler? Lern;
     }
 }
