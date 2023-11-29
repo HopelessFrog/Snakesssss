@@ -24,8 +24,8 @@ namespace Snakesssss.Service
             }
 
             var rdydata = await Task.Run(() => MLModelSnakes.LoadImageFromFolder(mlContext, AiFolder));
-            var qwe = rdydata.GetRowCount();
-            await Task.Run(() => MLModelSnakes.RetrainModel(mlContext, rdydata));
+            var qwe =   await Task.Run(() => MLModelSnakes.RetrainModel(mlContext, rdydata));
+            mlContext.Model.Save(qwe,rdydata.Schema, "MLModelSnakes.mlnet");
         }
 
         static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
@@ -47,7 +47,7 @@ namespace Snakesssss.Service
             foreach (FileInfo file in dir.GetFiles())
             {
                 string targetFilePath = Path.Combine(destinationDir, file.Name);
-                file.CopyTo(targetFilePath);
+                file.CopyTo(targetFilePath,true);
             }
 
             // If recursive and copying subdirectories, recursively call this method

@@ -79,6 +79,7 @@ namespace Snakesssss.ViewModels
                     Lern?.Invoke(this, EventArgs.Empty);
                      await AIService.LearnSnake(selectedFolderPath,Snake.Name);
                      Loaning = Visibility.Collapsed;
+                     buzy = false;
 
                     Close.Invoke();
 

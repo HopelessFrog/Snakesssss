@@ -585,11 +585,14 @@
                                                     VerticalAlignment="Center">
                                                     <StackPanel Orientation="Horizontal" Margin="2">
                                                         <TextBox
+                                                            IsReadOnly="True"
                                                             Text="{Binding AiSnake.Name}" FontWeight="Bold"
                                                             FontStretch="Normal" />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" Margin="2">
                                                         <TextBox
+                                                            IsReadOnly="True"
+
                                                             materialDesign:HintAssist.Hint="Family"
                                                             materialDesign:HintAssist.IsFloating="True"
                                                             Text="{Binding AiSnake.Family.Name}" />

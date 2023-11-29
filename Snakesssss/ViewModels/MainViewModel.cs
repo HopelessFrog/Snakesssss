@@ -554,8 +554,15 @@ namespace Snakesssss.ViewModels
                         {
                             ImageSource = File.ReadAllBytes(openFileDialog.FileName)
                         };
+                        SnakeRdy = Visibility.Hidden;
                         Loading = Visibility.Visible;
                         await Predict(sampleData);
+
+                        var www = MLModelSnakes.GetSortedScoresWithLabels(MLModelSnakes.Predict(sampleData));
+                        var qwe = DatabaseLocator.Context.Snakes.ToList();
+
+                        AiSnake =  qwe.Find(s => s.Name == Result);
+                        //AiSnake = DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
                         Loading = Visibility.Collapsed;
                         SnakeRdy = Visibility.Visible;
 
@@ -574,9 +581,7 @@ namespace Snakesssss.ViewModels
         private async Task Predict(MLModelSnakes.ModelInput sampleData)
         {
             await Task.Run(() => Result = MLModelSnakes.Predict(sampleData).PredictedLabel) ;
-            var qwe = DatabaseLocator.Context.Snakes.ToList();
-            AiSnake = qwe.Find(s => s.Name.Contains(Result));
-            //    AiSnake =   DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
+            
            
         }
         public ICommand DeleteSnake
@@ -609,6 +614,15 @@ namespace Snakesssss.ViewModels
         private void deleteItem(Snake snake)
         {
             Snakes.Remove(snake);
+            try
+            {
+                Directory.Delete(@"Samples\" + snake.Name, true);
+            }
+            catch
+            {
+
+            }
+          
         }
         private void deleteItemPoison(PoisonType poisonType)
         {
