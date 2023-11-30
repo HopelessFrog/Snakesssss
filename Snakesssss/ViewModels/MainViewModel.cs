@@ -22,6 +22,8 @@ using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq.Expressions;
 using System.Windows;
+using NLog;
+using Snakesssss.Service;
 using Brush = System.Drawing.Brush;
 using Brushes = System.Drawing.Brushes;
 
@@ -557,15 +559,13 @@ namespace Snakesssss.ViewModels
                         SnakeRdy = Visibility.Hidden;
                         Loading = Visibility.Visible;
                         await Predict(sampleData);
+                        LogMannager.logger.Error(Result);
 
-                        var www = MLModelSnakes.GetSortedScoresWithLabels(MLModelSnakes.Predict(sampleData));
-                        var qwe = DatabaseLocator.Context.Snakes.ToList();
-
-                        AiSnake =  qwe.Find(s => s.Name == Result);
-                        //AiSnake = DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
+                      
+                        AiSnake = DatabaseLocator.Context.Snakes.FirstOrDefault(s => s.Name! == Result);
                         Loading = Visibility.Collapsed;
                         SnakeRdy = Visibility.Visible;
-
+                        
 
                     }
                     else
